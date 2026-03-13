@@ -1,0 +1,120 @@
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+
+const pricingPlans = [
+  {
+    name: "PRIMER",
+    price: "FREE",
+    description: "Initial situational awareness for emerging operators.",
+    features: [
+      "Core Performance Analytics",
+      "Standard SOP Taxonomy",
+      "Community Dashboard",
+      "Public Engine Logs",
+    ],
+    cta: "Start Syncing",
+    popular: false,
+  },
+  {
+    name: "PARTNER FLEET",
+    price: "$99",
+    period: "/month",
+    description: "The professional standard for high-performance units.",
+    features: [
+      "Advanced Bayesian Models",
+      "Unlimited Administrators",
+      "Neural Sector Access",
+      "2.9% Transaction Floor",
+      "Custom Neural Nodes",
+    ],
+    cta: "Join Fleet",
+    popular: true,
+  },
+  {
+    name: "NEURAL SECTOR",
+    price: "CUSTOM",
+    description: "Enterprise-grade structural integrity for major institutions.",
+    features: [
+      "Dedicated Compute Clusters",
+      "Private SOP Overlays",
+      "Direct MD Pipeline",
+      "Zero Transaction Fees",
+      "Quantum Encryption",
+    ],
+    cta: "Bridge Sector",
+    popular: false,
+  },
+];
+
+export const Pricing = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section id="pricing" ref={containerRef} className="py-60 relative overflow-hidden bg-transparent">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col items-center text-center mb-32 space-y-6">
+          <div className="flex items-center gap-4">
+             <div className="w-12 h-px bg-primary/30" />
+             <span className="text-primary font-black tracking-[0.6em] text-[10px] uppercase">OPERATIONAL TIERS</span>
+             <div className="w-12 h-px bg-primary/30" />
+          </div>
+          <h2 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-none text-slate-900">
+            SCALAR <br />
+            <span className="text-gradient-primary">INVESTMENT.</span>
+          </h2>
+          <p className="text-slate-700 text-lg md:text-xl font-bold uppercase tracking-widest max-w-2xl">
+            Provision the exact level of structural integrity required for your current operational volume.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center">
+          {pricingPlans.map((plan, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ y: -20, scale: 1.02 }}
+              className={`pricing-card relative p-12 rounded-sm border ${
+                plan.popular ? 'border-primary bg-primary/5 shadow-[0_20px_80px_rgba(0,163,255,0.15)]' : 'border-slate-300 bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)]'
+              } backdrop-blur-3xl transition-all duration-700 flex flex-col h-full`}
+            >
+              {plan.popular && (
+                <div className="absolute top-0 right-12 -translate-y-1/2 bg-primary text-white text-[9px] font-black px-4 py-2 uppercase tracking-widest">
+                  MOST ACTIVE
+                </div>
+              )}
+
+              <div className="mb-12">
+                <h3 className="text-sm font-black tracking-[0.4em] text-primary uppercase mb-4">{plan.name}</h3>
+                <div className="flex items-baseline gap-2 text-slate-900">
+                  <span className="text-6xl font-black tracking-tighter uppercase">{plan.price}</span>
+                  {plan.period && <span className="text-slate-700 font-bold text-xs font-mono tracking-widest uppercase">{plan.period}</span>}
+                </div>
+                <p className="mt-6 text-slate-800 text-[10px] font-bold uppercase tracking-widest leading-relaxed">
+                  {plan.description}
+                </p>
+              </div>
+
+              <div className="flex-grow space-y-6 mb-12">
+                {plan.features.map((feature, j) => (
+                  <div key={j} className="flex items-center gap-4 group/item">
+                    <div className="w-1.5 h-1.5 bg-primary group-hover/item:scale-125 transition-transform rotate-45" />
+                    <span className="text-[11px] text-slate-900 font-bold uppercase tracking-widest group-hover/item:text-primary transition-colors">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              <button className={`w-full py-6 font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-500 border ${
+                plan.popular 
+                ? 'bg-primary text-white border-primary hover:bg-slate-900' 
+                : 'bg-transparent text-slate-900 border-slate-900 hover:border-primary hover:text-primary'
+              }`}>
+                {plan.cta}
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};

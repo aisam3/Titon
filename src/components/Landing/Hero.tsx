@@ -14,32 +14,47 @@ export const Hero = () => {
         opacity: 0,
         stagger: 0.1,
         duration: 1.5,
-        ease: "power4.out"
+        ease: "power4.out",
       })
-        .from(".hero-sub", {
-          y: 20,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out"
-        }, "-=0.8")
-        .from(".hero-cta", {
-          scale: 0.9,
-          opacity: 0,
-          duration: 1,
-          ease: "expo.out"
-        }, "-=0.5");
-
+        .from(
+          ".hero-sub",
+          {
+            y: 20,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.8",
+        )
+        .from(
+          ".hero-cta",
+          {
+            scale: 0.9,
+            opacity: 0,
+            duration: 1,
+            ease: "expo.out",
+          },
+          "-=0.5",
+        );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={containerRef} className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-20 overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-end">
+    <section
+      ref={containerRef}
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-20 overflow-visible">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-end overflow-visible">
         {/* Decorative Grid Lines */}
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none z-0">
-          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
         </div>
 
         {/* Content Box - Right Aligned with careful spacing */}
@@ -50,13 +65,17 @@ export const Hero = () => {
             </div>
             <h1 className="hero-line relative text-7xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase mb-4 text-slate-900">
               TITON T³ <br />
-              <span className="text-primary text-gradient-primary">PRIMER.</span>
+              <span className="text-primary text-gradient-primary">
+                PRIMER.
+              </span>
             </h1>
           </div>
 
           <p className="hero-sub text-lg md:text-xl text-slate-500 max-w-lg font-light leading-relaxed mb-14 tracking-wide uppercase">
             REDEFINING THE AI LANDSCAPE. <br />
-            <span className="text-slate-900 font-bold opacity-80">STAY IN CONTROL. TITON POWERS YOUR ANALYTICS.</span>
+            <span className="text-slate-900 font-bold opacity-80">
+              STAY IN CONTROL. TITON POWERS YOUR ANALYTICS.
+            </span>
           </p>
 
           <div className="hero-cta flex flex-wrap gap-6 justify-center md:justify-start items-center">
@@ -73,7 +92,9 @@ export const Hero = () => {
 
       {/* Scroll indicator refinement */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-        <div className="text-[10px] font-bold tracking-[0.5em] uppercase text-slate-400">SCROLL</div>
+        <div className="text-[10px] font-bold tracking-[0.5em] uppercase text-slate-400">
+          SCROLL
+        </div>
         <div className="w-[1px] h-12 bg-slate-400 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-primary animate-scroll-line" />
         </div>

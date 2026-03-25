@@ -27,22 +27,22 @@ const Navbar = () => {
     >
       <div className="max-w-[1800px] mx-auto flex items-center justify-between">
         <div className="flex items-center gap-12 group/nav cursor-pointer">
-          <div className="flex items-center group/logo">
-            <div className="relative w-20 h-20 flex items-center justify-center transition-all duration-500 ease-out group-hover/logo:scale-110">
+          <div className="flex items-center group/logo gap-4">
+            <div className="relative w-14 h-14 flex items-center justify-center transition-all duration-500 ease-out group-hover/logo:scale-110">
               {/* Main Background Glow */}
               <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full scale-50 opacity-0 group-hover/logo:opacity-100 group-hover/logo:scale-150 transition-all duration-700" />
-              
+
               {/* Subtle Constant Glow */}
               <div className="absolute inset-2 bg-primary/10 blur-xl rounded-full animate-pulse" />
 
-              <img 
-                src="/logo.jpg" 
-                alt="TITON Logo" 
-                className="relative z-10 w-full h-full object-contain transition-all duration-500 group-hover/logo:rotate-[5deg]" 
+              <img
+                src="/logo.jpg"
+                alt="TITON Logo"
+                className="relative z-10 w-full h-full object-contain transition-all duration-500 group-hover/logo:rotate-[5deg] mix-blend-multiply"
               />
             </div>
-            <div className="flex flex-col leading-none -ml-1">
-              <span className="font-black text-2xl tracking-tighter text-slate-900 uppercase translate-y-1 group-hover/logo:text-primary transition-colors duration-300">
+            <div className="flex flex-col leading-none">
+              <span className="font-black text-2xl tracking-tighter text-slate-900 uppercase group-hover/logo:text-primary transition-colors duration-300">
                 TITON
               </span>
               <span className="text-[10px] font-black tracking-[0.6em] text-primary uppercase opacity-60 group-hover/logo:opacity-100 transition-opacity duration-300">

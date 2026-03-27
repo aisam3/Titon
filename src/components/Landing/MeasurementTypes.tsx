@@ -32,7 +32,7 @@ export const MeasurementTypes = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="measurement" ref={containerRef} className="py-32 relative bg-white">
+    <section id="measurement" ref={containerRef} className="py-32 relative bg-slate-900/40">
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-center mb-24 gap-12">
           <div className="space-y-6 max-w-4xl">
@@ -40,7 +40,7 @@ export const MeasurementTypes = () => {
                <div className="w-8 h-[2px] bg-primary" />
                <span className="text-primary font-bold tracking-widest text-[10px] uppercase">ENGINEERING STACK</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight uppercase text-slate-900">
+            <h2 className="text-5xl md:text-7xl font-bold tracking-tight leading-tight uppercase text-white">
               STRUCTURAL <br />
               <span className="text-primary">HIERARCHY.</span>
             </h2>
@@ -53,16 +53,16 @@ export const MeasurementTypes = () => {
               key={index} 
               whileHover={{ rotateX: -5, rotateY: 5, translateZ: 30 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="group p-12 bg-white rounded-sm border-2 border-slate-100 hover:border-primary/50 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" 
+              className="group p-12 bg-slate-900/40 rounded-sm border-2 border-white/10 hover:border-primary/50 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" 
             >
               <div className="space-y-6" style={{ transform: 'translateZ(50px)' }}>
                 <div className="inline-block px-4 py-1 bg-primary text-white font-black text-[9px] tracking-[0.4em] uppercase shadow-[0_10px_20px_rgba(0,163,255,0.2)]">
                    {type.tag || type.category}
                 </div>
-                <h3 className="text-4xl font-black tracking-tighter text-slate-900 uppercase group-hover:text-primary transition-colors">
+                <h3 className="text-4xl font-black tracking-tighter text-white uppercase group-hover:text-primary transition-colors">
                    {type.title}
                 </h3>
-                <p className="text-slate-900 text-sm font-bold leading-relaxed max-w-sm uppercase tracking-wider">
+                <p className="text-white text-sm font-bold leading-relaxed max-w-sm uppercase tracking-wider">
                   {type.description}
                 </p>
               </div>

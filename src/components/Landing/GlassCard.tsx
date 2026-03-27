@@ -12,8 +12,8 @@ export const GlassCard = ({ children, className, glowColor = "rgba(59, 130, 246,
     <div
       className={cn(
         "relative overflow-hidden transition-all duration-700 ease-out",
-        "bg-white/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl",
-        "hover:bg-white/[0.08] hover:border-white/20",
+        "bg-slate-900/40/[0.03] backdrop-blur-2xl border border-white/10 rounded-3xl",
+        "hover:bg-slate-900/40/[0.08] hover:border-white/20",
         "group",
         className
       )}

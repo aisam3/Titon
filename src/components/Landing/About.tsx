@@ -12,11 +12,11 @@ export const About = () => {
             <div className="w-8 h-[2px] bg-primary" />
             <span className="text-primary font-bold tracking-widest text-[10px] uppercase">OUR MANIFESTO</span>
           </div>
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none uppercase text-slate-900">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none uppercase text-white">
             BUILDING <br />
             <span className="text-primary">CERTAINTY.</span>
           </h2>
-          <p className="mt-12 text-lg md:text-xl text-slate-600 leading-relaxed font-light tracking-wide uppercase">
+          <p className="mt-12 text-lg md:text-xl text-slate-300 leading-relaxed font-light tracking-wide uppercase">
             "In a world drowning in raw information, the challenge isn't acquiring data—it's navigating it. TITON provides the structural integrity needed to transform chaos into clarity."
           </p>
         </div>
@@ -31,14 +31,14 @@ export const About = () => {
               key={i}
               whileHover={{ rotateX: 10, rotateY: 10, translateZ: 20 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="group p-10 bg-slate-50/50 backdrop-blur-3xl rounded-sm border border-slate-200 shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:border-primary/50 transition-colors duration-500"
+              className="group p-10 bg-slate-900/40/50 backdrop-blur-3xl rounded-sm border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:border-primary/50 transition-colors duration-500"
             >
               <div className="space-y-6" style={{ transform: 'translateZ(40px)' }}>
                 <div className="w-12 h-12 rounded-sm bg-primary/10 flex items-center justify-center font-black text-primary text-xs border border-primary/20 shadow-[0_0_20px_rgba(0,163,255,0.2)]">
                   {String(i + 1).padStart(2, '0')}
                 </div>
-                <h3 className="text-2xl font-black tracking-tighter uppercase text-slate-900 group-hover:text-primary transition-colors">{card.title}</h3>
-                <p className="text-slate-600 text-xs font-mono leading-relaxed uppercase tracking-widest">
+                <h3 className="text-2xl font-black tracking-tighter uppercase text-white group-hover:text-primary transition-colors">{card.title}</h3>
+                <p className="text-slate-300 text-xs font-mono leading-relaxed uppercase tracking-widest">
                   {card.desc}
                 </p>
               </div>

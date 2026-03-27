@@ -60,10 +60,10 @@ export const Hero = () => {
         {/* Content Box - Right Aligned with careful spacing */}
         <div className="md:w-3/5 lg:w-1/2 flex flex-col items-center md:items-start text-center md:text-left relative z-10">
           <div className="relative mb-6 group">
-            <div className="inline-block px-3 py-1 bg-primary/5 border border-primary/10 rounded-full text-primary font-bold tracking-[0.3em] text-[10px] uppercase mb-8">
+            <div className="inline-block px-3 py-1 bg-slate-900/40/5 border border-white/10 rounded-full text-white/60 font-bold tracking-[0.3em] text-[10px] uppercase mb-8">
               ESTABLISHED 2026
             </div>
-            <h1 className="hero-line relative text-7xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase mb-4 text-slate-900">
+            <h1 className="hero-line relative text-7xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase mb-4 text-white">
               TITON T³ <br />
               <span className="text-primary text-gradient-primary">
                 PRIMER.
@@ -71,19 +71,19 @@ export const Hero = () => {
             </h1>
           </div>
 
-          <p className="hero-sub text-lg md:text-xl text-slate-500 max-w-lg font-light leading-relaxed mb-14 tracking-wide uppercase">
+          <p className="hero-sub text-lg md:text-xl text-slate-400 max-w-lg font-light leading-relaxed mb-14 tracking-wide uppercase">
             REDEFINING THE AI LANDSCAPE. <br />
-            <span className="text-slate-900 font-bold opacity-80">
+            <span className="text-white font-bold opacity-80">
               STAY IN CONTROL. TITON POWERS YOUR ANALYTICS.
             </span>
           </p>
 
           <div className="hero-cta flex flex-wrap gap-6 justify-center md:justify-start items-center">
-            <button className="group relative px-12 py-6 bg-slate-900 text-white font-black overflow-hidden transition-all duration-500 hover:bg-primary uppercase tracking-[0.2em] text-[10px]">
+            <button className="group relative px-12 py-6 bg-slate-100 text-slate-950 font-black overflow-hidden transition-all duration-500 hover:bg-primary hover:text-white uppercase tracking-[0.2em] text-[10px]">
               <span className="relative z-10">Access Primer</span>
               <div className="absolute inset-0 bg-primary translate-y-full transition-transform duration-500 group-hover:translate-y-0" />
             </button>
-            <button className="px-12 py-6 bg-transparent border border-slate-200 text-slate-900 font-black hover:border-primary hover:text-primary transition-all duration-500 uppercase tracking-[0.2em] text-[10px]">
+            <button className="px-12 py-6 bg-transparent border border-white text-white font-black hover:border-primary hover:text-primary transition-all duration-500 uppercase tracking-[0.2em] text-[10px]">
               Join Fleet
             </button>
           </div>

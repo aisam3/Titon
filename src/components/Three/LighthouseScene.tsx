@@ -32,11 +32,18 @@ const LighthouseContent = () => {
                 x: 0.85, y: 0.85, z: 0.85,
                 duration: 1, ease: "power2.inOut"
             }, 0);
-            tl.to(groupRef.current.getObjectByName('light-beam-group').rotation, {
-                z: Math.PI / 8,
-                duration: 1, ease: "power2.inOut"
-            }, 0);
+            const beam = groupRef.current.getObjectByName('light-beam-group');
+            if (beam) {
+                tl.to(beam.rotation, {
+                    z: -Math.PI / 8,
+                    duration: 1, ease: "power2.inOut"
+                }, 0);
 
+                tl.to(beam.rotation, {
+                    z: Math.PI / 8,
+                    duration: 1, ease: "power2.inOut"
+                }, 1);
+            }
 
             tl.to(groupRef.current.position, {
                 x: 4.5, y: -0.5, z: -1,
@@ -44,10 +51,6 @@ const LighthouseContent = () => {
             }, 1);
             tl.to(groupRef.current.scale, {
                 x: 1, y: 1, z: 1,
-                duration: 1, ease: "power2.inOut"
-            }, 1);
-            tl.to(groupRef.current.getObjectByName('light-beam-group').rotation, {
-                z: -Math.PI / 8,
                 duration: 1, ease: "power2.inOut"
             }, 1);
 

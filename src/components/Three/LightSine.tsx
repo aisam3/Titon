@@ -3,7 +3,7 @@ import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
 export const LightSineModel = () => {
-  const lightSineTexture = useTexture('/light%20sine.png');
+  const lightSineTexture = useTexture('/light-sine.png');
 
   return (
     <group name="light-beam-group" position={[0, 5.5, 0.1]} rotation={[0, 0, Math.PI / 3.5]}>

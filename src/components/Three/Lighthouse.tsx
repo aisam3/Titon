@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import { LightSineModel } from './LightSine';
 
 export const LighthouseModel = () => {
-  const lighthouseTexture = useTexture('/Light House.png');
+  const lighthouseTexture = useTexture('/light-house.png');
 
   return (
     <group scale={1.2}>

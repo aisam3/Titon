@@ -56,7 +56,7 @@ export const MeasurementTypes = () => {
               className="group p-12 bg-slate-900/40 rounded-sm border-2 border-white/10 hover:border-primary/50 transition-all duration-700 shadow-[0_10px_30px_rgba(0,0,0,0.05)]" 
             >
               <div className="space-y-6" style={{ transform: 'translateZ(50px)' }}>
-                <div className="inline-block px-4 py-1 bg-primary text-white font-black text-[9px] tracking-[0.4em] uppercase shadow-[0_10px_20px_rgba(0,163,255,0.2)]">
+                <div className="inline-block px-4 py-1 bg-[#84ce3a] text-black font-black text-[9px] tracking-[0.4em] uppercase shadow-[0_10px_20px_rgba(132,206,58,0.2)]">
                    {type.tag || type.category}
                 </div>
                 <h3 className="text-4xl font-black tracking-tighter text-white uppercase group-hover:text-primary transition-colors">

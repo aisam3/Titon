@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
+import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Landing/Hero";
 import { About } from "@/components/Landing/About";
 import { Frameworks as Achievements } from "@/components/Landing/Frameworks";
@@ -70,7 +70,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div id="index-container" className="relative bg-[#f8fafc] text-slate-900 min-h-screen selection:bg-primary/30 selection:text-white overflow-hidden">
+    <div id="index-container" className="relative bg-[#050b18] text-white min-h-screen selection:bg-[#84ce3a]/30 selection:text-white overflow-hidden">
       {/* Scroll Progress Indicator */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-primary z-[200] origin-left"

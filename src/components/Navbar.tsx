@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const Navbar = () => {
+export const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
 
@@ -55,7 +55,7 @@ const Navbar = () => {
         <div className="flex items-center gap-10">
           <a
             href="#contact"
-            className="px-8 py-3 bg-primary text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white hover:text-slate-900 transition-all duration-300"
+            className="px-8 py-3 bg-[#84ce3a] text-black text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-300 rounded"
           >
             Commence
           </a>

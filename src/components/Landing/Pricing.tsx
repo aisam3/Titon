@@ -72,7 +72,7 @@ export const Pricing = () => {
             <motion.div
               key={i}
               whileHover={{ y: -20, scale: 1.02 }}
-              className={`pricing-card relative p-12 rounded-sm border ${plan.popular ? 'border-primary bg-primary/5 shadow-[0_20px_80px_rgba(0,163,255,0.15)]' : 'border-slate-300 bg-slate-900/40 shadow-[0_10px_40px_rgba(0,0,0,0.1)]'
+              className={`pricing-card relative p-12 rounded-sm border ${plan.popular ? 'border-primary bg-primary/5 shadow-[0_20px_80px_rgba(132,206,58,0.15)]' : 'border-white/10 bg-slate-900/40 shadow-[0_10px_40px_rgba(0,0,0,0.1)]'
                 } backdrop-blur-3xl transition-all duration-700 flex flex-col h-full`}
             >
               {plan.popular && (
@@ -104,8 +104,8 @@ export const Pricing = () => {
               </div>
 
               <button className={`w-full py-6 font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-500 border ${plan.popular
-                ? 'bg-primary text-white border-primary hover:bg-slate-900'
-                : 'bg-transparent text-white border-slate-900 hover:border-primary hover:text-primary'
+                ? 'bg-primary text-black border-primary hover:bg-[#99da56]'
+                : 'bg-transparent text-white border-white/10 hover:border-primary hover:text-primary'
                 }`}>
                 {plan.cta}
               </button>

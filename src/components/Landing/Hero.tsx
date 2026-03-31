@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Signal, Play, ShieldCheck } from "lucide-react";
 
 export const Hero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -7,96 +8,92 @@ export const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ delay: 0.5 });
-
-      tl.from(".hero-line", {
-        y: 100,
-        rotateX: -45,
+      tl.from(".hero-content > *", {
+        y: 40,
         opacity: 0,
-        stagger: 0.1,
-        duration: 1.5,
-        ease: "power4.out",
-      })
-        .from(
-          ".hero-sub",
-          {
-            y: 20,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-          },
-          "-=0.8",
-        )
-        .from(
-          ".hero-cta",
-          {
-            scale: 0.9,
-            opacity: 0,
-            duration: 1,
-            ease: "expo.out",
-          },
-          "-=0.5",
-        );
+        stagger: 0.2,
+        duration: 1,
+        ease: "power2.out",
+      });
     }, containerRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-20 overflow-visible">
-      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-end overflow-visible">
-        {/* Decorative Grid Lines */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none z-0">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: "radial-gradient(#000 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
+    <section ref={containerRef} className="relative min-h-screen flex items-center pt-20 pb-20">
+      <div className="container mx-auto px-6 relative z-10 flex flex-col md:flex-row gap-12 items-center">
+        {/* Left Space for Lighthouse - Adjust width to fit the 3D model */}
+        <div className="hidden md:block md:w-1/2" />
 
-        {/* Content Box - Right Aligned with careful spacing */}
-        <div className="md:w-3/5 lg:w-1/2 flex flex-col items-center md:items-start text-center md:text-left relative z-10">
-          <div className="relative mb-6 group">
-            <div className="inline-block px-3 py-1 bg-slate-900/40/5 border border-white/10 rounded-full text-white/60 font-bold tracking-[0.3em] text-[10px] uppercase mb-8">
+        {/* Right Content */}
+        <div className="w-full md:w-1/2 hero-content flex flex-col space-y-8">
+          <div>
+            <div className="inline-block px-3 py-1 border border-white/20 rounded-full text-white/40 text-[10px] uppercase tracking-widest mb-6">
               ESTABLISHED 2026
             </div>
-            <h1 className="hero-line relative text-7xl md:text-9xl font-black leading-[0.85] tracking-tighter uppercase mb-4 text-white">
-              TITON T³ <br />
-              <span className="text-primary text-gradient-primary">
-                PRIMER.
-              </span>
+            <h1 className="text-5xl md:text-8xl font-black leading-tight text-white mb-4">
+              Cutting Through
+              the <span className="inline-flex">
+                <span className="text-[#84ce3a]">F</span>
+                <span className="text-[#f59e0b]">o</span>
+                <span className="text-[#06b6d4]">g</span>
+              </span> of AI — <br />
+              Together.
             </h1>
+            <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed">
+              If you've felt overwhelmed by "AI everything," you're in the right harbor. We turn the fog into <span className="text-white font-bold italic">Signal → Action → Proof.</span>
+            </p>
           </div>
 
-          <p className="hero-sub text-lg md:text-xl text-slate-400 max-w-lg font-light leading-relaxed mb-14 tracking-wide uppercase">
-            REDEFINING THE AI LANDSCAPE. <br />
-            <span className="text-white font-bold opacity-80">
-              STAY IN CONTROL. TITON POWERS YOUR ANALYTICS.
-            </span>
-          </p>
+          {/* Feature Boxes */}
+          <div className="grid grid-cols-1 gap-4 max-w-lg">
+            <div className="flex items-center gap-4 p-5 bg-[#0a1120] border border-white/5 rounded-xl hover:border-[#84ce3a]/30 transition-all group">
+              <div className="p-3 bg-white/5 rounded-lg group-hover:bg-[#84ce3a]/20 transition-colors">
+                <Signal className="w-6 h-6 text-[#84ce3a]" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg">Signal</h3>
+                <p className="text-slate-500 text-sm">Clear insights cutting through the fog of AI complexity</p>
+              </div>
+            </div>
 
-          <div className="hero-cta flex flex-wrap gap-6 justify-center md:justify-start items-center">
-            <button className="group relative px-12 py-6 bg-slate-100 text-slate-950 font-black overflow-hidden transition-all duration-500 hover:bg-primary hover:text-white uppercase tracking-[0.2em] text-[10px]">
-              <span className="relative z-10">Access Primer</span>
-              <div className="absolute inset-0 bg-primary translate-y-full transition-transform duration-500 group-hover:translate-y-0" />
+            <div className="flex items-center gap-4 p-5 bg-[#0a1120] border border-white/5 rounded-xl hover:border-[#f59e0b]/30 transition-all group">
+              <div className="p-3 bg-white/5 rounded-lg group-hover:bg-[#f59e0b]/20 transition-colors">
+                <Play className="w-6 h-6 text-[#f59e0b]" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg">Action</h3>
+                <p className="text-slate-500 text-sm">Guided pathways to transform intelligence into results</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 p-5 bg-[#0a1120] border border-white/5 rounded-xl hover:border-[#06b6d4]/30 transition-all group">
+              <div className="p-3 bg-white/5 rounded-lg group-hover:bg-[#06b6d4]/20 transition-colors">
+                <ShieldCheck className="w-6 h-6 text-[#06b6d4]" />
+              </div>
+              <div>
+                <h3 className="text-white font-bold text-lg">Proof</h3>
+                <p className="text-slate-500 text-sm">Measurable outcomes that validate your AI investments</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex flex-wrap gap-4 pt-4">
+            <button className="px-8 py-3 bg-[#84ce3a] text-black font-bold text-sm rounded hover:bg-[#99da56] transition-colors uppercase tracking-tight">
+              GET THE COMPASS
             </button>
-            <button className="px-12 py-6 bg-transparent border border-white text-white font-black hover:border-primary hover:text-primary transition-all duration-500 uppercase tracking-[0.2em] text-[10px]">
-              Join Fleet
+            <button className="px-8 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded hover:bg-white/5 transition-colors">
+              View Proof Tiles
             </button>
+          </div>
+
+          <div className="text-[10px] text-white/30 italic tracking-widest pt-2">
+            AI Business Friends · Partner Track: The TITONS of AI Automation Agencies
           </div>
         </div>
       </div>
-
-      {/* Scroll indicator refinement */}
-      {/* <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-        <div className="text-[10px] font-bold tracking-[0.5em] uppercase text-slate-400">SCROLL</div>
-        <div className="w-[1px] h-12 bg-slate-400 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-full bg-primary animate-scroll-line" />
-        </div>
-      </div> */}
     </section>
   );
 };
+

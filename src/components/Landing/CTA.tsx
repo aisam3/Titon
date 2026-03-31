@@ -22,10 +22,10 @@ export const CTA = () => {
                </p>
 
                <div className="flex flex-wrap justify-center md:justify-start gap-6 pt-6">
-                  <button className="px-12 py-6 bg-primary text-white font-black rounded-sm border border-primary/50 hover:bg-slate-900 hover:text-white transition-all duration-500 shadow-[0_20px_50px_rgba(0,163,255,0.2)] uppercase tracking-widest text-xs">
+                  <button className="px-12 py-6 bg-[#84ce3a] text-black font-black rounded hover:bg-[#99da56] transition-all duration-500 uppercase tracking-widest text-xs">
                      Join on Skool.com
                   </button>
-                  <button className="px-12 py-6 bg-transparent border border-white/10 text-white font-black rounded-sm hover:border-primary hover:text-primary transition-all duration-500 uppercase tracking-widest text-xs">
+                  <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black rounded hover:border-[#84ce3a] hover:text-[#84ce3a] transition-all duration-500 uppercase tracking-widest text-xs">
                      The Primer
                   </button>
                </div>

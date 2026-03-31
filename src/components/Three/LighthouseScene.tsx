@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { PerspectiveCamera, Stars, Float, Cloud, Sphere, Environment, Sky } from '@react-three/drei';
+import { PerspectiveCamera, Stars, Float, Cloud, Sphere, Environment, Sky, Html } from '@react-three/drei';
 import { LighthouseModel } from './Lighthouse';
 import * as THREE from 'three';
 import gsap from 'gsap';
@@ -75,8 +75,9 @@ const LighthouseContent = () => {
             />
 
             <fogExp2 attach="fog" args={['#0f172a', 0.02]} />
-
-            <Environment preset="night" environmentIntensity={0.5} />
+            
+            {/* Disabled Environment preset as requested for production stability */}
+            {/* <Environment preset="night" environmentIntensity={0.5} /> */}
 
             <Stars radius={120} depth={50} count={0} factor={0} />
 
@@ -104,7 +105,7 @@ export const LighthouseScene = () => {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale hover:grayscale-0 transition-all duration-1000"
             >
-                <source src="/Fog.mp4" type="video/mp4" />
+                <source src="/fog.mp4" type="video/mp4" />
             </video>
 
             <Canvas
@@ -118,7 +119,13 @@ export const LighthouseScene = () => {
                 dpr={[1, 2]}
             >
                 <PerspectiveCamera makeDefault position={[0, 0, 14]} fov={40} />
-                <React.Suspense fallback={null}>
+                <React.Suspense fallback={
+                    <Html center>
+                        <span className="text-white text-xs uppercase tracking-widest bg-slate-900/50 px-4 py-2 rounded-full backdrop-blur-md">
+                            Loading...
+                        </span>
+                    </Html>
+                }>
                     <LighthouseContent />
                 </React.Suspense>
             </Canvas>

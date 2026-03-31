@@ -13,7 +13,7 @@ export const LightSineModel = () => {
         <meshBasicMaterial
           color="#ffff99"
           transparent
-          opacity={0.85}
+          opacity={0.50}
           side={THREE.DoubleSide}
           depthTest={false}
           depthWrite={false}

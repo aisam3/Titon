@@ -10,7 +10,7 @@ import { CTA as Contact } from "@/components/Landing/CTA";
 import { LighthouseScene } from "@/components/Three/LighthouseScene";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);

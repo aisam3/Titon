@@ -80,8 +80,11 @@ export const Hero = () => {
 
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 pt-4">
-            <button className="px-8 py-3 bg-[#84ce3a] text-black font-bold text-sm rounded hover:bg-[#99da56] transition-colors uppercase tracking-tight">
-              GET THE COMPASS
+            <button 
+              onClick={() => window.open("https://www.skool.com/business-optimization-experts-5569", "_blank")}
+              className="px-8 py-3 bg-[#84ce3a] text-black font-bold text-sm rounded hover:bg-[#99da56] transition-colors uppercase tracking-tight"
+            >
+              JOIN SKOOL.COM
             </button>
             <button className="px-8 py-3 bg-transparent border border-white/20 text-white font-medium text-sm rounded hover:bg-white/5 transition-colors">
               View Proof Tiles

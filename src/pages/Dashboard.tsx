@@ -34,6 +34,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { PerformanceCharts } from "@/components/Dashboard/PerformanceCharts";
 import { exportUtils } from "@/utils/exportUtils";
+import { useSubscription } from "@/hooks/useSubscription";
 
 import { AuthModal } from "@/components/AuthModal";
 import {
@@ -58,6 +59,7 @@ const Dashboard = () => {
   const [intelligence, setIntelligence] = useState<{ ranking: RankingData; comparisons: SOPComparison[] } | null>(null);
   const [comparisonData, setComparisonData] = useState<{ name: string; avgScore: number }[]>([]);
   const [loading, setLoading] = useState(false);
+  const { subscription, usage, refresh: refreshSubscription } = useSubscription();
 
   // Log creation form state
   const [newLog, setNewLog] = useState({ time: "", output: "", errors: "" });
@@ -145,6 +147,7 @@ const Dashboard = () => {
       await sopService.createSOP(newSopName);
       setNewSopName("");
       fetchSOPs();
+      refreshSubscription();
       toast({ title: "SOP Created", description: "New system procedure initialized successfully." });
     } catch (err: any) {
       toast({ title: "Creation Failed", description: err.message, variant: "destructive" });
@@ -181,6 +184,7 @@ const Dashboard = () => {
       );
       setNewLog({ time: "", output: "", errors: "" });
       await fetchDetails(selectedSopId);
+      refreshSubscription();
       toast({ title: "Log Added", description: "Your performance record has been saved successfully." });
     } catch (err: any) {
       toast({ title: "Failed to Add Log", description: err.message, variant: "destructive" });
@@ -256,19 +260,22 @@ const Dashboard = () => {
         onSuccess={checkUser}
       />
 
-      <main className="container mx-auto px-6 pt-32 pb-20 space-y-12 transition-all duration-700" style={{ opacity: user ? 1 : 0.4 }}>
+      <main className="container mx-auto px-6 pt-32 pb-20 space-y-12 transition-all duration-700">
         {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 transition-opacity duration-500">
           <div className="space-y-2">
-            <h1 className="text-4xl font-black tracking-tighter uppercase text-white">Performance &nbsp; Dashboard</h1>
-            <p className="text-slate-400 text-xs font-mono uppercase tracking-[0.3em]">Version 1.0.4 - {user ? "Logged In" : "Signed Out"}</p>
+            <h1 className="text-4xl font-black tracking-tighter uppercase">
+              <span className="text-white">Performance</span> &nbsp; 
+              <span className="text-primary italic">Dashboard</span>
+            </h1>
+            <p className="text-slate-300 text-[10px] font-mono uppercase tracking-[0.3em] opacity-80">Version 1.0.4 - {user ? "Logged In" : "Signed Out"}</p>
           </div>
 
           <div className="flex items-center gap-4 bg-slate-900/40 p-2 pl-4 rounded-lg border border-white/5 backdrop-blur-xl">
             {user ? (
               <div className="flex items-center gap-4">
-                <div className="flex flex-col text-right">
-                  <span className="text-[10px] text-primary font-black tracking-widest uppercase">Active User</span>
+                <div className="flex flex-col text-right pr-2">
+                  <span className="text-[10px] text-primary font-black tracking-widest uppercase">Active Operator</span>
                   <span className="text-[11px] text-white font-mono opacity-60">{user.email}</span>
                 </div>
                 <Button
@@ -280,38 +287,12 @@ const Dashboard = () => {
                 >
                   <ShieldCheck className="w-5 h-5" />
                 </Button>
-
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-10 w-10 text-slate-400 hover:text-red-400 hover:bg-red-500/10"
-                    >
-                      <LogOut className="w-5 h-5" />
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="bg-[#0c1425] border-white/10 text-white backdrop-blur-xl">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle className="text-xl font-black uppercase tracking-tight text-white">Terminate Session?</AlertDialogTitle>
-                      <AlertDialogDescription className="text-slate-400 font-medium">
-                        Are you sure you want to exit the intelligence system? You will need to re-authenticate to access your metrics.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter className="mt-6">
-                      <AlertDialogCancel className="bg-transparent border-white/10 text-slate-400 hover:bg-white/5 hover:text-white font-bold uppercase tracking-widest text-[10px]">Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleLogout}
-                        className="bg-red-500/10 text-red-500 border border-red-500/20 hover:bg-red-500 hover:text-white transition-all font-black uppercase tracking-widest text-[10px]"
-                      >
-                        Log Out
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
               </div>
             ) : (
-              <Button onClick={() => setIsAuthModalOpen(true)} className="bg-primary text-black font-black uppercase text-xs tracking-widest px-8">
+              <Button 
+                onClick={() => setIsAuthModalOpen(true)} 
+                className="bg-primary text-black font-black uppercase text-[10px] tracking-[0.2em] px-8 py-5 h-auto hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(132,206,58,0.25)]"
+              >
                 Sign In
               </Button>
             )}
@@ -325,11 +306,14 @@ const Dashboard = () => {
             </div>
             <div className="space-y-2">
               <h2 className="text-2xl font-black uppercase tracking-widest text-white">Secure Area</h2>
-              <p className="text-slate-400 text-sm max-w-md mx-auto font-medium">
+              <p className="text-slate-300 text-sm max-w-md mx-auto font-medium leading-relaxed">
                 Please sign in to view your performance records and AI-powered insights.
               </p>
             </div>
-            <Button onClick={() => setIsAuthModalOpen(true)} variant="outline" className="border-primary text-primary hover:bg-primary hover:text-black font-black mt-4">
+            <Button 
+              onClick={() => setIsAuthModalOpen(true)} 
+              className="bg-primary text-black font-black uppercase tracking-widest px-8 py-6 h-auto mt-4 hover:bg-primary/90 shadow-[0_0_20px_rgba(132,206,58,0.3)] transition-all hover:scale-105 active:scale-95"
+            >
               SIGN IN
             </Button>
           </div>
@@ -341,7 +325,14 @@ const Dashboard = () => {
             <div className="lg:col-span-3 space-y-6">
               <Card className="bg-slate-900/40 border-white/10 backdrop-blur-xl">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-xs font-black uppercase tracking-[0.2em] text-white">My Projects</CardTitle>
+                  <div className="flex justify-between items-center mb-2">
+                    <CardTitle className="text-xs font-black uppercase tracking-[0.2em] text-white">My Projects</CardTitle>
+                    {usage && (
+                      <span className="text-[9px] font-mono text-primary font-bold">
+                        {usage.sop_count}/{usage.sop_limit}
+                      </span>
+                    )}
+                  </div>
                   <div className="flex gap-2 mt-4">
                     <Input
                       placeholder="Project Name..."
@@ -441,6 +432,20 @@ const Dashboard = () => {
                       className="bg-black/40 border-white/5 h-10 text-white"
                     />
                   </div>
+                  {usage && (
+                    <div className="space-y-1.5 pb-2">
+                      <div className="flex justify-between text-[8px] font-black uppercase tracking-widest text-slate-500">
+                        <span>Log Capacity</span>
+                        <span>{usage.log_count} / {usage.log_limit}</span>
+                      </div>
+                      <div className="h-1 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className={`h-full transition-all duration-500 ${usage.log_count >= usage.log_limit ? "bg-red-500" : "bg-primary"}`}
+                          style={{ width: `${Math.min(100, (usage.log_count / usage.log_limit) * 100)}%` }}
+                        />
+                      </div>
+                    </div>
+                  )}
                   <Button onClick={handleCreateLog} className="w-full bg-[#84ce3a] hover:bg-[#99da56] text-black font-black uppercase text-xs tracking-widest py-6 mt-2">
                     ADD LOG ENTRY
                   </Button>

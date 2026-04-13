@@ -140,7 +140,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               {isResetMode ? "Reset Password" : "Titon App Account"}
             </DialogTitle>
           </div>
-          <DialogDescription className="text-slate-400 text-sm font-normal">
+          <DialogDescription className="text-slate-300 text-sm font-medium leading-relaxed">
             {isResetMode
               ? "Enter your email address to receive a password reset link."
               : "Please sign in or create an account to manage your data."}
@@ -164,12 +164,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   className="space-y-4 py-4"
                 >
                   <div className="space-y-2">
-                    <label className="text-xs font-medium uppercase text-slate-500">Email Address</label>
+                    <label className="text-xs font-medium uppercase text-slate-400">Email Address</label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <Input
                         placeholder="your@email.com"
-                        className="bg-black/50 border-white/10 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                        className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
@@ -177,7 +177,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   </div>
                   <div className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <label className="text-xs font-medium uppercase text-slate-500">Password</label>
+                      <label className="text-xs font-medium uppercase text-slate-400">Password</label>
                       <button
                         onClick={() => setIsResetMode(true)}
                         className="text-[10px] font-semibold text-primary hover:text-white transition-colors"
@@ -190,7 +190,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter password..."
-                        className="bg-black/50 border-white/10 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                                                className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -221,37 +221,37 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                   className="space-y-4 py-4"
                 >
                   <div className="space-y-2">
-                    <label className="text-xs font-medium uppercase text-slate-500">Full Name</label>
+                    <label className="text-xs font-medium uppercase text-slate-400">Full Name</label>
                     <div className="relative">
                       <User className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <Input
                         placeholder="John Doe"
-                        className="bg-black/50 border-white/10 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                        className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-medium uppercase text-slate-500">Email Address</label>
+                    <label className="text-xs font-medium uppercase text-slate-400">Email Address</label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <Input
                         placeholder="your@email.com"
-                        className="bg-black/50 border-white/10 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                        className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-medium uppercase text-slate-500">Password</label>
+                    <label className="text-xs font-medium uppercase text-slate-400">Password</label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Letters + Numbers + Special"
-                        className="bg-black/50 border-white/10 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                                                className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                       />
@@ -265,13 +265,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-xs font-medium uppercase text-slate-500">Confirm Password</label>
+                    <label className="text-xs font-medium uppercase text-slate-400">Confirm Password</label>
                     <div className="relative">
                       <ShieldCheck className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="Type password again..."
-                        className="bg-black/50 border-white/10 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                                                className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 pr-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                       />
@@ -292,12 +292,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
         ) : (
           <div className="space-y-6 pt-4 pb-8">
             <div className="space-y-2">
-              <label className="text-xs font-medium uppercase text-slate-500">Email Address</label>
+              <label className="text-xs font-medium uppercase text-slate-400">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
                 <Input
                   placeholder="your@email.com"
-                  className="bg-black/50 border-white/10 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50"
+                  className="bg-black/60 border-white/20 text-white placeholder:text-slate-600 pl-10 h-11 text-sm rounded-md focus-visible:ring-primary/50 transition-all border-opacity-50 hover:border-white/30"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -314,7 +314,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
               </Button>
               <button
                 onClick={() => setIsResetMode(false)}
-                className="w-full text-xs font-semibold text-slate-500 hover:text-white transition-colors py-2"
+                className="w-full text-xs font-semibold text-slate-400 hover:text-white transition-colors py-2"
               >
                 Back to Login
               </button>

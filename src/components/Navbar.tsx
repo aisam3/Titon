@@ -1,13 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, UserPlus, LayoutDashboard, LogOut, Home } from "lucide-react";
+import { supabase } from "@/lib/supabase";
+import { AuthModal } from "./AuthModal";
+import { toast } from "sonner";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [session, setSession] = useState<any>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
     gsap.fromTo(
       navRef.current,
       { y: -100, opacity: 0 },
@@ -16,8 +34,18 @@ export const Navbar = () => {
 
     const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      subscription.unsubscribe();
+    };
   }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    toast.success("Successfully logged out");
+    navigate("/");
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -53,18 +81,62 @@ export const Navbar = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6">
-            <a
-              href="/dashboard"
-              className="px-6 py-3 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:border-primary hover:text-primary transition-all duration-300 rounded"
-            >
-              Dashboard
-            </a>
-            <a
-              href="#contact"
-              className="px-8 py-3 bg-[#84ce3a] text-black text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-300 rounded"
-            >
-              Commence
-            </a>
+            {!session ? (
+              <>
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="px-6 py-3 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:border-primary hover:text-primary transition-all duration-300 rounded"
+                >
+                  <div className="flex items-center gap-2">
+                    <LogIn className="w-3 h-3" />
+                    Sign In
+                  </div>
+                </button>
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="px-8 py-3 bg-[#84ce3a] text-black text-[10px] font-black uppercase tracking-[0.4em] hover:bg-white transition-all duration-300 rounded"
+                >
+                  <div className="flex items-center gap-2">
+                    <UserPlus className="w-3 h-3" />
+                    Join Titon
+                  </div>
+                </button>
+              </>
+            ) : (
+              <>
+                {location.pathname !== "/dashboard" && (
+                  <a
+                    href="/dashboard"
+                    className="px-6 py-3 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:border-primary hover:text-primary transition-all duration-300 rounded"
+                  >
+                    <div className="flex items-center gap-2">
+                      <LayoutDashboard className="w-3 h-3" />
+                      Dashboard
+                    </div>
+                  </a>
+                )}
+                {location.pathname === "/dashboard" && (
+                  <a
+                    href="/"
+                    className="px-6 py-3 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:border-primary hover:text-primary transition-all duration-300 rounded"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Home className="w-3 h-3" />
+                      Back to home
+                    </div>
+                  </a>
+                )}
+                <button
+                  onClick={handleLogout}
+                  className="px-8 py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:bg-red-500/10 hover:border-red-500/50 hover:text-red-500 transition-all duration-300 rounded"
+                >
+                  <div className="flex items-center gap-2">
+                    <LogOut className="w-3 h-3" />
+                    Exit System
+                  </div>
+                </button>
+              </>
+            )}
           </div>
 
           {/* Mobile Toggle */}
@@ -84,26 +156,61 @@ export const Navbar = () => {
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
-          <a
-            href="/dashboard"
-            onClick={() => setIsMenuOpen(false)}
-            className="w-full py-6 text-center border border-white/10 text-white text-xs font-black uppercase tracking-[0.5em] hover:bg-white/5 transition-all"
-          >
-            Dashboard
-          </a>
-          <a
-            href="#contact"
-            onClick={() => setIsMenuOpen(false)}
-            className="w-full py-6 text-center bg-[#84ce3a] text-black text-xs font-black uppercase tracking-[0.5em] hover:bg-[#99da56] transition-all"
-          >
-            Commence
-          </a>
+          {!session ? (
+            <>
+              <button
+                onClick={() => { setIsAuthModalOpen(true); setIsMenuOpen(false); }}
+                className="w-full py-6 text-center border border-white/10 text-white text-xs font-black uppercase tracking-[0.5em] hover:bg-white/5 transition-all"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => { setIsAuthModalOpen(true); setIsMenuOpen(false); }}
+                className="w-full py-6 text-center bg-[#84ce3a] text-black text-xs font-black uppercase tracking-[0.5em] hover:bg-[#99da56] transition-all"
+              >
+                Join Titon
+              </button>
+            </>
+          ) : (
+            <>
+              <a
+                href="/dashboard"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full py-6 text-center border border-white/10 text-white text-xs font-black uppercase tracking-[0.5em] hover:bg-white/5 transition-all"
+              >
+                Go to Dashboard
+              </a>
+              <a
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full py-6 text-center border border-white/10 text-white text-xs font-black uppercase tracking-[0.5em] hover:bg-white/5 transition-all"
+              >
+                Back to home
+              </a>
+              <button
+                onClick={handleLogout}
+                className="w-full py-6 text-center bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-black uppercase tracking-[0.5em] hover:bg-red-500/20 transition-all"
+              >
+                Exit System
+              </button>
+            </>
+          )}
           
           <div className="mt-12 text-[9px] text-slate-500 font-bold tracking-[0.4em] uppercase text-center">
             TITON CORE v1.0.4 - ACTIVE SYSTEM
           </div>
         </div>
       </div>
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccess={() => {
+          setIsAuthModalOpen(false);
+          supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session);
+          });
+        }}
+      />
     </>
   );
 };

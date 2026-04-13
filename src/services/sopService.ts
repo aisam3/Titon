@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { subscriptionService } from './subscriptionService';
 
 export interface SOP {
   id: string;
@@ -71,8 +72,14 @@ export interface SOPDetails {
 export const sopService = {
   /**
    * Insert a new SOP log and perform calculations via Supabase RPC (Option A).
+   * ENFORCES LOG LIMIT.
    */
   async insertLog(sopId: string, timeTaken: number, output: number, errors: number) {
+    const usage = await subscriptionService.getUsageStats();
+    if (usage && usage.log_count >= usage.log_limit) {
+      throw new Error("Log limit reached. Upgrade your plan.");
+    }
+
     const { data, error } = await supabase.rpc('insert_sop_log', {
       p_sop_id: sopId,
       p_time_taken: timeTaken,
@@ -435,8 +442,14 @@ export const sopService = {
 
   /**
    * Create a new SOP.
+   * ENFORCES SOP LIMIT.
    */
   async createSOP(name: string, description?: string) {
+    const usage = await subscriptionService.getUsageStats();
+    if (usage && usage.sop_count >= usage.sop_limit) {
+      throw new Error("SOP limit reached. Upgrade your plan.");
+    }
+
     const { data, error } = await supabase
       .from('sops')
       .insert({ name, description, user_id: (await supabase.auth.getUser()).data.user?.id })

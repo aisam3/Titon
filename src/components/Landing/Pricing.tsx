@@ -1,16 +1,19 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { subscriptionService } from "@/services/subscriptionService";
+import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
 const pricingPlans = [
   {
     name: "PRIMER",
     price: "FREE",
-    description: "Initial situational awareness for emerging operators.",
+    description: "Initial situational awareness with a 3-entry performance cap.",
     features: [
       "Core Performance Analytics",
-      "Standard SOP Taxonomy",
+      "3 Maximum Execution Logs",
+      "3 Total Active Projects",
       "Community Dashboard",
-      "Public Engine Logs",
     ],
     cta: "Start Syncing",
     popular: false,
@@ -20,13 +23,13 @@ const pricingPlans = [
     price: "$99",
     period: "/month",
     priceId: "price_1THdvd34NiMjgD3rQITGjGqs",
-    description: "The professional standard for high-performance units.",
+    description: "Professional scale with 500 Project and Log capacity.",
     features: [
-      "Advanced Bayesian Models",
-      "Unlimited Administrators",
+      "500 Total Active Projects",
+      "500 Maximum Execution Logs",
       "Neural Sector Access",
-      "2.9% Transaction Floor",
-      "Custom Neural Nodes",
+      "Advanced Bayesian Models",
+      "Priority System Support",
     ],
     cta: "Join Fleet",
     popular: true,
@@ -57,14 +60,64 @@ export const Pricing = () => {
 
     // ✅ FREE PLAN FIX
     if (plan.price === "FREE") {
-      alert("Free plan activated 🚀");
+      setLoadingPlan(plan.name);
+      try {
+        const success = await subscriptionService.activateFreePlan();
+        if (success) {
+          toast.success("Free plan activated on your account 🚀", {
+            description: "You now have 3 Project and 3 Log slots.",
+          });
+        } else {
+          toast.error("Failed to activate plan", {
+            description: "Please sign in to link this plan to your account.",
+          });
+        }
+      } catch (err) {
+        toast.error("An error occurred during activation.");
+      } finally {
+        setLoadingPlan(null);
+      }
+      return;
+    }
+
+    // ✅ $99 (PRO) PLAN - STRIPE CHECKOUT ONLY
+    if (plan.price === "$99") {
+      setLoadingPlan(plan.name);
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+          toast.error("Please sign in to join the fleet.");
+          return;
+        }
+
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            priceId: plan.priceId || null,
+            userId: user.id, // Pass user ID to secure the upgrade
+            isCustom: false,
+          }),
+        });
+
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          toast.error("Checkout failed. Try again.");
+        }
+      } catch (err) {
+        toast.error("Server error during checkout.");
+      } finally {
+        setLoadingPlan(null);
+      }
       return;
     }
 
     setLoadingPlan(plan.name);
 
     try {
-      const res = await fetch("/create-checkout-session", {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -8,7 +8,7 @@ function stripeApiPlugin(env: Record<string, string>): Plugin {
     name: "stripe-api",
     configureServer(server) {
       server.middlewares.use(
-        "/create-checkout-session",
+        "/api/checkout",
         async (req: any, res: any) => {
           if (req.method !== "POST") {
             res.statusCode = 405;
@@ -40,16 +40,16 @@ function stripeApiPlugin(env: Record<string, string>): Plugin {
                       quantity: 1,
                     },
                   ],
-                  success_url: "http://localhost:8080/success",
-                  cancel_url: "http://localhost:8080/cancel",
+                  success_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/success?session_id={CHECKOUT_SESSION_ID}`,
+                  cancel_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/cancel`,
                 });
               } else {
                 session = await stripe.checkout.sessions.create({
                   payment_method_types: ["card"],
                   mode: "subscription",
                   line_items: [{ price: priceId, quantity: 1 }],
-                  success_url: "http://localhost:8080/success",
-                  cancel_url: "http://localhost:8080/cancel",
+                  success_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/success?session_id={CHECKOUT_SESSION_ID}`,
+                  cancel_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/cancel`,
                 });
               }
 
@@ -60,6 +60,34 @@ function stripeApiPlugin(env: Record<string, string>): Plugin {
               res.statusCode = 500;
               res.setHeader("Content-Type", "application/json");
               res.end(JSON.stringify({ error: err.message }));
+            }
+          });
+        }
+      );
+
+      server.middlewares.use(
+        "/api/webhook",
+        async (req: any, res: any) => {
+          if (req.method !== "POST") {
+            res.statusCode = 405;
+            res.end("Method Not Allowed");
+            return;
+          }
+
+          let body = "";
+          req.on("data", (chunk: Buffer) => (body += chunk.toString()));
+          req.on("end", () => {
+            try {
+              const event = JSON.parse(body);
+              console.log(`[Stripe Webhook Dev] Received event: ${event.type}`);
+              
+              res.statusCode = 200;
+              res.setHeader("Content-Type", "application/json");
+              res.end(JSON.stringify({ received: true }));
+            } catch (err) {
+              console.error("[Stripe Webhook Dev] Error parsing webhook body");
+              res.statusCode = 400;
+              res.end("Invalid JSON");
             }
           });
         }
@@ -96,12 +124,18 @@ export default defineConfig(({ mode }) => {
             if (id.includes('lucide-react') || id.includes('@radix-ui')) {
               return 'vendor-ui';
             }
+            if (id.includes('gsap') || id.includes('framer-motion')) {
+              return 'vendor-animation';
+            }
+            if (id.includes('@supabase') || id.includes('stripe')) {
+              return 'vendor-services';
+            }
             return 'vendor';
           }
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 2000,
   },
 };
 });

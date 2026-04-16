@@ -27,6 +27,10 @@ function stripeApiPlugin(env: Record<string, string>): Plugin {
               let session;
 
               if (isCustom) {
+                const { entries } = JSON.parse(body);
+                const entryCount = parseInt(entries) || 1000;
+                const unitAmount = Math.round(entryCount * 0.18 * 100); // 0.18 per entry in cents
+
                 session = await stripe.checkout.sessions.create({
                   payment_method_types: ["card"],
                   mode: "payment",
@@ -34,13 +38,16 @@ function stripeApiPlugin(env: Record<string, string>): Plugin {
                     {
                       price_data: {
                         currency: "usd",
-                        product_data: { name: "Custom Plan" },
-                        unit_amount: 50000, // $500
+                        product_data: { 
+                          name: `Neural Sector Custom Expansion`,
+                          description: `Operational capacity: ${entryCount.toLocaleString()} units.`,
+                        },
+                        unit_amount: unitAmount,
                       },
                       quantity: 1,
                     },
                   ],
-                  success_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/success?session_id={CHECKOUT_SESSION_ID}`,
+                  success_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/success?session_id={CHECKOUT_SESSION_ID}&entries=${entryCount}`,
                   cancel_url: `${env.VITE_SITE_URL || 'http://localhost:8080'}/cancel`,
                 });
               } else {

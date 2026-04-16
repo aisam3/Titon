@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { subscriptionService } from "@/services/subscriptionService";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
+import { CustomPricingModal } from "./CustomPricingModal";
 
 const pricingPlans = [
   {
@@ -54,6 +55,40 @@ const pricingPlans = [
 export const Pricing = () => {
   const containerRef = useRef(null);
   const [loadingPlan, setLoadingPlan] = useState(null);
+  const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
+
+  const handleCustomCheckout = async (entries: number) => {
+    setLoadingPlan("NEURAL SECTOR");
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        toast.error("Please sign in to configure your sector.");
+        return;
+      }
+
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          isCustom: true,
+          entries: entries,
+          userId: user.id
+        }),
+      });
+
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast.error("Checkout failed. Try again.");
+      }
+    } catch (err) {
+      toast.error("Server error during checkout.");
+    } finally {
+      setLoadingPlan(null);
+      setIsCustomModalOpen(false);
+    }
+  };
 
   const handleCheckout = async (plan) => {
     console.log("Clicked:", plan);
@@ -111,6 +146,11 @@ export const Pricing = () => {
       } finally {
         setLoadingPlan(null);
       }
+      return;
+    }
+
+    if (plan.price === "CUSTOM") {
+      setIsCustomModalOpen(true);
       return;
     }
 
@@ -240,6 +280,13 @@ export const Pricing = () => {
           ))}
         </div>
       </div>
+
+      <CustomPricingModal 
+        isOpen={isCustomModalOpen}
+        onClose={() => setIsCustomModalOpen(false)}
+        onConfirm={handleCustomCheckout}
+        isLoading={loadingPlan === "NEURAL SECTOR"}
+      />
     </section>
   );
 };

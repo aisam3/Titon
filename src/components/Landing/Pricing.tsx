@@ -36,18 +36,18 @@ const pricingPlans = [
     popular: true,
   },
   {
-    name: "NEURAL SECTOR",
+    name: "CUSTOM PLAN",
     price: "CUSTOM",
     description:
-      "Enterprise-grade structural integrity for major institutions.",
+      "Scale your business with a tailored solution built to your exact needs.",
     features: [
-      "Dedicated Compute Clusters",
-      "Private SOP Overlays",
-      "Direct MD Pipeline",
-      "Zero Transaction Fees",
-      "Quantum Encryption",
+      "Dedicated Server Support",
+      "Unlimited Project Logs",
+      "Priority Customer Support",
+      "No Hidden Fees",
+      "Highest Level Security",
     ],
-    cta: "Bridge Sector",
+    cta: "Configure Plan",
     popular: false,
   },
 ];
@@ -58,36 +58,12 @@ export const Pricing = () => {
   const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
 
   const handleCustomCheckout = async (entries: number) => {
-    setLoadingPlan("NEURAL SECTOR");
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        toast.error("Please sign in to configure your sector.");
-        return;
-      }
-
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          isCustom: true,
-          entries: entries,
-          userId: user.id
-        }),
-      });
-
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        toast.error("Checkout failed. Try again.");
-      }
-    } catch (err) {
-      toast.error("Server error during checkout.");
-    } finally {
-      setLoadingPlan(null);
+    setLoadingPlan("CUSTOM PLAN");
+    setTimeout(() => {
+      window.location.href = "https://www.skool.com/business-optimization-experts-5569/about";
       setIsCustomModalOpen(false);
-    }
+      setLoadingPlan(null);
+    }, 800);
   };
 
   const handleCheckout = async (plan) => {
@@ -115,70 +91,18 @@ export const Pricing = () => {
       return;
     }
 
-    // ✅ $99 (PRO) PLAN - STRIPE CHECKOUT ONLY
-    if (plan.price === "$99") {
+    // ✅ Pro Plan - Redirect to Skool
+    if (plan.name === "PARTNER FLEET" || plan.price === "$99") {
       setLoadingPlan(plan.name);
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (!user) {
-          toast.error("Please sign in to join the fleet.");
-          return;
-        }
-
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            priceId: plan.priceId || null,
-            userId: user.id, // Pass user ID to secure the upgrade
-            isCustom: false,
-          }),
-        });
-
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          toast.error("Checkout failed. Try again.");
-        }
-      } catch (err) {
-        toast.error("Server error during checkout.");
-      } finally {
-        setLoadingPlan(null);
-      }
+      setTimeout(() => {
+        window.location.href = "https://www.skool.com/business-optimization-experts-5569/about";
+      }, 500);
       return;
     }
 
     if (plan.price === "CUSTOM") {
       setIsCustomModalOpen(true);
       return;
-    }
-
-    setLoadingPlan(plan.name);
-
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          priceId: plan.priceId || null,
-          isCustom: plan.price === "CUSTOM",
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error("No checkout URL returned");
-        alert("Something went wrong.");
-      }
-    } catch (err) {
-      console.error("Checkout error:", err);
-      alert("Server error. Is backend running?");
-    } finally {
-      setLoadingPlan(null);
     }
   };
 
@@ -235,7 +159,7 @@ export const Pricing = () => {
                 </h3>
 
                 <div className="flex items-baseline gap-2 text-white">
-                  <span className="text-6xl font-black tracking-tighter uppercase">
+                  <span className={`${plan.price === "CUSTOM" ? "text-4xl md:text-5xl" : "text-6xl"} font-black tracking-tighter uppercase`}>
                     {plan.price}
                   </span>
                   {plan.period && (
@@ -253,8 +177,8 @@ export const Pricing = () => {
               {/* FEATURES */}
               <div className="flex-grow space-y-6 mb-12">
                 {plan.features.map((feature, j) => (
-                  <div key={j} className="flex items-center gap-4 group/item">
-                    <div className="w-1.5 h-1.5 bg-primary group-hover/item:scale-125 transition-transform rotate-45" />
+                  <div key={j} className="flex items-start gap-4 group/item">
+                    <div className="w-1.5 h-1.5 mt-1.5 bg-primary group-hover/item:scale-125 transition-transform rotate-45 shrink-0" />
                     <span className="text-[11px] text-white font-bold uppercase tracking-widest group-hover/item:text-primary transition-colors">
                       {feature}
                     </span>
@@ -285,7 +209,7 @@ export const Pricing = () => {
         isOpen={isCustomModalOpen}
         onClose={() => setIsCustomModalOpen(false)}
         onConfirm={handleCustomCheckout}
-        isLoading={loadingPlan === "NEURAL SECTOR"}
+        isLoading={loadingPlan === "CUSTOM PLAN"}
       />
     </section>
   );

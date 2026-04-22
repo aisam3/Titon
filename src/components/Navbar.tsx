@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Menu, X, LogIn, UserPlus, LayoutDashboard, LogOut, Home } from "lucide-react";
+import { Menu, X, LogIn, UserPlus, LayoutDashboard, LogOut, Home, Sparkles } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { AuthModal } from "./AuthModal";
 import { toast } from "sonner";
@@ -81,6 +81,15 @@ export const Navbar = () => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-6">
+            <a
+              href="/pop"
+              className="px-6 py-3 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.4em] hover:border-primary hover:text-primary transition-all duration-300 rounded"
+            >
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-3 h-3 text-primary" />
+                POP Offer
+              </div>
+            </a>
             {!session ? (
               <>
                 <button
@@ -156,6 +165,13 @@ export const Navbar = () => {
         }`}
       >
         <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
+          <a
+            href="/pop"
+            onClick={() => setIsMenuOpen(false)}
+            className="w-full py-6 text-center bg-primary/10 border border-primary/20 text-primary text-xs font-black uppercase tracking-[0.5em] hover:bg-primary/20 transition-all"
+          >
+            🔥 POP Offer
+          </a>
           {!session ? (
             <>
               <button

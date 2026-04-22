@@ -9,6 +9,7 @@ import ResetPassword from "./pages/ResetPassword.tsx";
 import Success from "./pages/checkout/Success.tsx";
 import Cancel from "./pages/checkout/Cancel.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PopPage from "./pages/PopPage.tsx";
 
 const queryClient = new QueryClient();
 
@@ -24,7 +25,7 @@ const App = () => (
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/pop" element={<PopPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -14,11 +14,15 @@ const LighthouseContent = () => {
     useEffect(() => {
         const mm = gsap.matchMedia();
         mm.add("(min-width: 768px)", () => {
+            const isPopPage = !!document.querySelector("#pop-container");
+            const trigger = isPopPage ? "#pop-container" : "#index-container";
+            const endTrigger = isPopPage ? "#problem-amplification" : "#achievements-section";
+
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: "#index-container",
+                    trigger: trigger,
                     start: "top top",
-                    endTrigger: "#achievements-section",
+                    endTrigger: endTrigger,
                     end: "bottom bottom",
                     scrub: 1.5,
                 }

@@ -20,7 +20,7 @@ export const PopHero = () => {
           Audit Analysis Complete
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9] sm:leading-none">
           Here’s What’s Holding Your <span className="text-primary italic">Growth</span> Back
         </h1>
         

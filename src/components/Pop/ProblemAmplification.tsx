@@ -6,7 +6,7 @@ export const ProblemAmplification = () => {
   return (
     <div className="max-w-5xl mx-auto w-full">
       <div className="text-center mb-20">
-        <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white uppercase mb-8">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl font-black tracking-tighter text-white uppercase mb-8 leading-[0.9] sm:leading-none">
           The Hidden Cost of <span className="text-red-500">Inaction</span>
         </h2>
         <div className="h-1 w-24 bg-red-500 mx-auto" />

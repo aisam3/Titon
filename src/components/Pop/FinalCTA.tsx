@@ -8,12 +8,12 @@ export const FinalCTA = () => {
        <div className="absolute inset-0 bg-primary/5 -z-10" />
        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 blur-[150px] -z-10 rounded-full" />
 
-       <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase italic mb-8 leading-none">
+       <h2 className="text-3xl sm:text-5xl md:text-8xl font-black tracking-tighter text-white uppercase italic mb-8 leading-[0.9] sm:leading-none">
          Stop Guessing. <br />
          Start <span className="text-primary italic underline underline-offset-8">Scaling</span>.
        </h2>
 
-       <p className="text-xl text-slate-400 font-medium mb-12 max-w-2xl mx-auto mb-16">
+       <p className="text-xl text-slate-400 font-medium max-w-2xl mx-auto mb-16">
          The TITON system is ready for your data. Lock in your custom growth plan today and fix your manual bottlenecks forever.
        </p>
 

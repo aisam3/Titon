@@ -9,7 +9,7 @@ export const SolutionIntro = () => {
         The Solution
       </div>
 
-      <h2 className="text-4xl md:text-7xl font-black tracking-tighter text-white uppercase mb-8 leading-none">
+      <h2 className="text-3xl sm:text-4xl md:text-7xl font-black tracking-tighter text-white uppercase mb-8 leading-[0.9] sm:leading-none">
         Your Custom <span className="text-primary italic underline decoration-primary/30">Growth Plan</span>
       </h2>
 

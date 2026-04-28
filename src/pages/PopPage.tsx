@@ -8,16 +8,14 @@ import { motion, useScroll, useSpring } from "framer-motion";
 
 // Import POP Components (to be created)
 import { PopHero } from "@/components/Pop/PopHero";
-import { AuditBreakdown } from "@/components/Pop/AuditBreakdown";
-import { ProblemAmplification } from "@/components/Pop/ProblemAmplification";
-import { SolutionIntro } from "@/components/Pop/SolutionIntro";
-import { OfferDetails } from "@/components/Pop/OfferDetails";
-import { TrustSection } from "@/components/Pop/TrustSection";
-import { HowItWorks } from "@/components/Pop/HowItWorks";
-import { PricingStack } from "@/components/Pop/PricingStack";
-import { UrgencySection } from "@/components/Pop/UrgencySection";
+import { FogToProof } from "@/components/Pop/FogToProof";
+import { PartnerRole } from "@/components/Pop/PartnerRole";
+import { PurpleCow } from "@/components/Pop/PurpleCow";
+import { PopPath } from "@/components/Pop/PopPath";
+import { Economics } from "@/components/Pop/Economics";
+import { AccessStructure } from "@/components/Pop/AccessStructure";
 import { FinalCTA } from "@/components/Pop/FinalCTA";
-import { FAQSection } from "@/components/Pop/FAQSection";
+import { WaitlistModal } from "@/components/Pop/WaitlistModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +26,14 @@ const PopPage = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  const [isWaitlistOpen, setIsWaitlistOpen] = React.useState(false);
+  const [selectedFleet, setSelectedFleet] = React.useState("Charter");
+
+  const handleOpenWaitlist = (fleet: string = "Charter") => {
+    setSelectedFleet(fleet);
+    setIsWaitlistOpen(true);
+  };
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -53,16 +59,13 @@ const PopPage = () => {
     // Standard Scroll Entry Animations
     const sections = [
       '#pop-hero', 
-      '#audit-breakdown', 
-      '#problem-amplification', 
-      '#solution-intro', 
-      '#offer-details', 
-      '#trust-section', 
-      '#how-it-works', 
-      '#pricing-stack', 
-      '#urgency-section', 
-      '#final-cta', 
-      '#faq-section'
+      '#fog-to-proof', 
+      '#partner-role', 
+      '#purple-cow', 
+      '#pop-path', 
+      '#economics', 
+      '#access-structure', 
+      '#final-cta'
     ];
     
     sections.forEach((selector) => {
@@ -100,73 +103,61 @@ const PopPage = () => {
       {/* Persistent 3D Lighthouse Scene */}
       <LighthouseScene />
 
-      <main className="relative z-10">
+      <main className="relative z-10 pt-20">
         <section id="pop-hero" className="min-h-[90vh] flex items-center justify-center py-20 px-6">
           <div className="w-full">
-            <PopHero />
+            <PopHero onOpenWaitlist={() => handleOpenWaitlist("Charter")} />
           </div>
         </section>
 
-        <section id="audit-breakdown" className="min-h-[80vh] flex items-center py-20 px-6 bg-slate-950/40 backdrop-blur-sm border-y border-white/5">
+        <section id="fog-to-proof" className="min-h-[80vh] flex items-center py-32 px-6 bg-slate-950/40 backdrop-blur-sm border-y border-white/5">
           <div className="w-full">
-            <AuditBreakdown />
+            <FogToProof />
           </div>
         </section>
 
-        <section id="problem-amplification" className="min-h-[80vh] flex items-center py-20 px-6">
+        <section id="partner-role" className="min-h-[80vh] flex items-center py-32 px-6">
           <div className="w-full">
-            <ProblemAmplification />
+            <PartnerRole />
           </div>
         </section>
 
-        <section id="solution-intro" className="min-h-[80vh] flex items-center py-20 px-6 bg-primary/5">
+        <section id="purple-cow" className="min-h-[80vh] flex items-center py-32 px-6 bg-primary/5 border-y border-white/5">
           <div className="w-full">
-            <SolutionIntro />
+            <PurpleCow />
           </div>
         </section>
 
-        <section id="offer-details" className="min-h-[80vh] flex items-center py-20 px-6">
+        <section id="pop-path" className="min-h-[80vh] flex items-center py-32 px-6 bg-slate-950/40 backdrop-blur-sm">
           <div className="w-full">
-            <OfferDetails />
+            <PopPath />
           </div>
         </section>
 
-        <section id="trust-section" className="min-h-[80vh] flex items-center py-20 px-6 bg-slate-950/40 backdrop-blur-sm border-y border-white/5">
+        <section id="economics" className="min-h-[80vh] flex items-center py-32 px-6">
           <div className="w-full">
-            <TrustSection />
+            <Economics />
           </div>
         </section>
 
-        <section id="how-it-works" className="min-h-[80vh] flex items-center py-20 px-6">
+        <section id="access-structure" className="py-32 px-6 bg-primary/5 border-y border-white/5">
           <div className="w-full">
-            <HowItWorks />
+            <AccessStructure onOpenWaitlist={handleOpenWaitlist} />
           </div>
         </section>
 
-        <section id="pricing-stack" className="min-h-[100vh] flex items-center py-20 px-6 bg-primary/5">
+        <section id="final-cta" className="min-h-[60vh] flex items-center py-32 px-6 bg-slate-950/40 backdrop-blur-sm">
           <div className="w-full">
-            <PricingStack />
-          </div>
-        </section>
-
-        <section id="urgency-section" className="py-20 px-6 bg-red-500/10 border-y border-red-500/20">
-          <div className="w-full">
-            <UrgencySection />
-          </div>
-        </section>
-
-        <section id="final-cta" className="min-h-[60vh] flex items-center py-20 px-6">
-          <div className="w-full">
-            <FinalCTA />
-          </div>
-        </section>
-
-        <section id="faq-section" className="py-20 px-6 bg-slate-950/40 backdrop-blur-sm border-t border-white/5">
-          <div className="w-full">
-            <FAQSection />
+            <FinalCTA onOpenWaitlist={handleOpenWaitlist} />
           </div>
         </section>
       </main>
+
+      <WaitlistModal 
+        isOpen={isWaitlistOpen} 
+        onClose={() => setIsWaitlistOpen(false)} 
+        defaultFleet={selectedFleet}
+      />
     </div>
   );
 };

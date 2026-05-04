@@ -62,6 +62,26 @@ const StartHere = () => {
     }
   };
 
+  const [activePrinciple, setActivePrinciple] = useState<number | null>(null);
+
+  const principles = [
+    { 
+      title: "Proof Over Promise", 
+      text: "We believe that activity without evidence is just hype. Every TITON workflow must generate a measurable Proof Tile that validates real improvement and creates a visible record of success.",
+      icon: ShieldCheck 
+    },
+    { 
+      title: "Collective Authority", 
+      text: "We believe the power of the collaborative outweighs the intelligence of any single agency. By sharing anonymized data and benchmark-ready Proof Tiles, we elevate the entire network's industry authority.",
+      icon: Users 
+    },
+    { 
+      title: "Operational Sovereignty", 
+      text: "We believe in building systems that agencies truly own. TITON turns chaotic day-to-day workflow activity into a disciplined, high-value enterprise asset through structured Signal → Action → Proof logic.",
+      icon: Target 
+    }
+  ];
+
   return (
     <div id="start-here-container" className="relative bg-[#050b18] text-white min-h-screen selection:bg-primary/30 selection:text-white overflow-hidden font-['Inter',_sans-serif]">
       {/* Scroll Progress Indicator */}
@@ -100,7 +120,13 @@ const StartHere = () => {
                   New here? You're in the right place. Below is everything you need to understand what TITON is, whether it's for you, and how to take your first step.
                 </p>
               </div>
-              <div className="pt-10">
+              <div 
+                className="pt-10 cursor-pointer hover:opacity-70 transition-opacity"
+                onClick={() => {
+                  const creedSection = document.getElementById('creed');
+                  creedSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <ChevronRight className="w-10 h-10 text-primary mx-auto animate-bounce" />
               </div>
             </div>
@@ -123,22 +149,51 @@ const StartHere = () => {
               </p>
             </div>
             
-            <div className="grid gap-8">
-              {[
-                { title: "Principle 1", text: "[Placeholder for Operating Principle 1]" },
-                { title: "Principle 2", text: "[Placeholder for Operating Principle 2]" },
-                { title: "Principle 3", text: "[Placeholder for Operating Principle 3]" }
-              ].map((item, i) => (
-                <div key={i} className="group p-8 bg-black/40 border border-white/5 rounded-2xl hover:border-primary/30 transition-all duration-500">
-                  <div className="flex items-start gap-6">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 group-hover:bg-primary transition-all duration-500">
-                      <ShieldCheck className="w-6 h-6 text-primary group-hover:text-black" />
+            <div className="grid gap-6">
+              {principles.map((item, i) => (
+                <div 
+                  key={i} 
+                  className={`group p-8 border transition-all duration-700 cursor-pointer rounded-[32px] ${
+                    activePrinciple === i 
+                    ? "bg-primary/10 border-primary/40 shadow-[0_0_50px_-12px_rgba(132,206,58,0.2)]" 
+                    : "bg-black/40 border-white/5 hover:border-primary/20"
+                  }`}
+                  onClick={() => setActivePrinciple(activePrinciple === i ? null : i)}
+                >
+                  <div className="flex items-center justify-between gap-6">
+                    <div className="flex items-center gap-6">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 ${
+                        activePrinciple === i ? "bg-primary text-black" : "bg-white/5 text-primary group-hover:bg-primary/10"
+                      }`}>
+                        <item.icon className="w-7 h-7" />
+                      </div>
+                      <h3 className={`text-2xl font-black uppercase tracking-tight transition-colors duration-500 ${
+                        activePrinciple === i ? "text-white" : "text-slate-400 group-hover:text-white"
+                      }`}>
+                        {item.title}
+                      </h3>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-black uppercase tracking-tight text-white mb-2">{item.title}</h3>
-                      <p className="text-slate-400 leading-relaxed font-medium">{item.text}</p>
+                    <div className={`transition-transform duration-500 ${activePrinciple === i ? "rotate-180 text-primary" : "text-slate-600"}`}>
+                      <ChevronRight className="w-6 h-6 rotate-90" />
                     </div>
                   </div>
+                  
+                  <motion.div
+                    initial={false}
+                    animate={{ 
+                      height: activePrinciple === i ? "auto" : 0,
+                      opacity: activePrinciple === i ? 1 : 0,
+                      marginTop: activePrinciple === i ? 24 : 0
+                    }}
+                    transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pl-20 pr-10">
+                      <p className="text-xl text-slate-300 leading-relaxed font-medium">
+                        {item.text}
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
               ))}
             </div>

@@ -68,6 +68,26 @@ const HowItWorks = () => {
     }
   };
 
+  const [activeEngine, setActiveEngine] = useState<number | null>(null);
+
+  const engineItems = [
+    { 
+      title: "Lighthouse", 
+      desc: "The visibility layer — shows what's working across the collaborative in real time. It aggregates Proof Tiles into a cinematic, high-level view of system performance.",
+      icon: Activity
+    },
+    { 
+      title: "ENS (Enterprise Notification System)", 
+      desc: "The signal layer — routes workflow triggers, alerts, and intelligence to the right place. It ensures that every important operational signal is captured and acted upon.",
+      icon: Workflow
+    },
+    { 
+      title: "Flywheel", 
+      desc: "The momentum layer — individual proof feeds collective analytics, which feeds benchmark intelligence, which in turn feeds better individual proof. The more you contribute, the faster it spins.",
+      icon: Repeat
+    }
+  ];
+
   return (
     <div id="how-it-works-container" className="relative bg-[#050b18] text-white min-h-screen selection:bg-primary/30 selection:text-white overflow-hidden font-['Inter',_sans-serif]">
       {/* Scroll Progress Indicator */}
@@ -106,7 +126,13 @@ const HowItWorks = () => {
                   TITON is not a dashboard. It is a system that helps you prove improvement, learn from peers, and build authority through disciplined operations.
                 </p>
               </div>
-              <div className="pt-10">
+              <div 
+                className="pt-10 cursor-pointer hover:opacity-70 transition-opacity"
+                onClick={() => {
+                  const frameworkSection = document.getElementById('framework');
+                  frameworkSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
                 <ChevronRight className="w-10 h-10 text-primary mx-auto animate-bounce" />
               </div>
             </div>
@@ -242,37 +268,58 @@ const HowItWorks = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={sectionVariants}
-            className="container mx-auto max-w-6xl"
+            className="container mx-auto max-w-4xl"
           >
             <div className="text-center mb-24">
               <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase mb-6">The TITON Engine</h2>
               <p className="text-2xl text-primary font-black uppercase tracking-[0.4em]">Lighthouse · ENS · Flywheel</p>
             </div>
             
-            <div className="grid lg:grid-cols-3 gap-12">
-              {[
-                { 
-                  title: "Lighthouse", 
-                  desc: "The visibility layer — shows what's working across the collaborative in real time.",
-                  icon: Activity
-                },
-                { 
-                  title: "ENS (Notification System)", 
-                  desc: "The signal layer — routes workflow triggers, alerts, and intelligence to the right place.",
-                  icon: Workflow
-                },
-                { 
-                  title: "Flywheel", 
-                  desc: "The momentum layer — individual proof feeds collective analytics, which feeds benchmark intelligence.",
-                  icon: Repeat
-                }
-              ].map((item, i) => (
-                <div key={i} className="p-12 bg-black/60 border border-white/10 rounded-[64px] space-y-8 hover:border-primary/40 transition-all duration-700 group">
-                  <div className="w-20 h-20 bg-primary/5 border border-primary/20 rounded-3xl flex items-center justify-center group-hover:bg-primary transition-all duration-500">
-                    <item.icon className="w-10 h-10 text-primary group-hover:text-black" />
+            <div className="grid gap-6">
+              {engineItems.map((item, i) => (
+                <div 
+                  key={i} 
+                  className={`group p-8 border transition-all duration-700 cursor-pointer rounded-[32px] ${
+                    activeEngine === i 
+                    ? "bg-primary/10 border-primary/40 shadow-[0_0_50px_-12px_rgba(132,206,58,0.2)]" 
+                    : "bg-black/40 border-white/5 hover:border-primary/20"
+                  }`}
+                  onClick={() => setActiveEngine(activeEngine === i ? null : i)}
+                >
+                  <div className="flex items-center justify-between gap-6">
+                    <div className="flex items-center gap-6">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 ${
+                        activeEngine === i ? "bg-primary text-black" : "bg-white/5 text-primary group-hover:bg-primary/10"
+                      }`}>
+                        <item.icon className="w-7 h-7" />
+                      </div>
+                      <h3 className={`text-2xl font-black uppercase tracking-tight transition-colors duration-500 ${
+                        activeEngine === i ? "text-white" : "text-slate-400 group-hover:text-white"
+                      }`}>
+                        {item.title}
+                      </h3>
+                    </div>
+                    <div className={`transition-transform duration-500 ${activeEngine === i ? "rotate-180 text-primary" : "text-slate-600"}`}>
+                      <ChevronRight className="w-6 h-6 rotate-90" />
+                    </div>
                   </div>
-                  <h3 className="text-3xl font-black uppercase tracking-tighter text-white">{item.title}</h3>
-                  <p className="text-slate-400 font-medium leading-relaxed">{item.desc}</p>
+                  
+                  <motion.div
+                    initial={false}
+                    animate={{ 
+                      height: activeEngine === i ? "auto" : 0,
+                      opacity: activeEngine === i ? 1 : 0,
+                      marginTop: activeEngine === i ? 24 : 0
+                    }}
+                    transition={{ duration: 0.5, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    className="overflow-hidden"
+                  >
+                    <div className="pl-20 pr-10">
+                      <p className="text-xl text-slate-300 leading-relaxed font-medium">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
               ))}
             </div>

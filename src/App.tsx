@@ -10,6 +10,8 @@ import Success from "./pages/checkout/Success.tsx";
 import Cancel from "./pages/checkout/Cancel.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PopPage from "./pages/PopPage.tsx";
+import KMVault from "./pages/KM/KMVault.tsx";
+import R6Audit from "./pages/R6Audit/R6Audit.tsx";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,8 @@ const App = () => (
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
           <Route path="/pop" element={<PopPage />} />
+          <Route path="/kmvault" element={<KMVault />} />
+          <Route path="/r6-audit" element={<R6Audit />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

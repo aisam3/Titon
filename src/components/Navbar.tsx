@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { AuthModal } from "./AuthModal";
 import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
+import { GlobalSearch } from "./GlobalSearch";
 
 export const Navbar = () => {
   const navRef = useRef<HTMLElement>(null);
@@ -48,11 +49,13 @@ export const Navbar = () => {
   };
 
   const navLinks = [
+    { name: "KM Vault", href: "/kmvault" },
     { name: "About", href: "#about" },
     { name: "POP", href: "/pop" },
-    { name: "Community", href: "#community" },
-    { name: "Press", href: "#press" },
-    { name: "Support", href: "#support" },
+    // { name: "R6 Audit", href: "#r6-audit" },
+    { name: "PSD Quickstart", href: "#psd-quickstart" },
+    { name: "Proof", href: "#proof" },
+    { name: "Dashboard", href: "/dashboard" },
   ];
 
   return (
@@ -60,11 +63,10 @@ export const Navbar = () => {
       <div className="fixed top-0 left-0 right-0 z-[100] flex justify-center w-full transition-all duration-500 pt-4 md:pt-6 px-4 pointer-events-none">
         <nav
           ref={navRef}
-          className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between w-full max-w-[1400px] ${
-            scrolled || isMenuOpen
+          className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between w-full max-w-[1400px] ${scrolled || isMenuOpen
               ? "py-3 px-6 bg-[#0a1122]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-[32px]"
               : "py-4 px-2 bg-transparent rounded-none"
-          }`}
+            }`}
         >
           {/* Logo Section */}
           <a href="/" className="flex items-center gap-3 group/logo cursor-pointer shrink-0">
@@ -102,8 +104,8 @@ export const Navbar = () => {
           {/* Right Actions (Desktop) */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <a
-              href="#"
-              className="group flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-black text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all duration-500"
+              href="/r6-audit"
+              className="group flex items-center gap-2 px-5 py-2.5 bg-[#84ce3a]/10 border border-[#84ce3a]/20 text-[#84ce3a] hover:bg-[#84ce3a] hover:text-black text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all duration-500"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>R6 Audit</span>
@@ -129,23 +131,6 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                {location.pathname !== "/dashboard" ? (
-                  <a
-                    href="/dashboard"
-                    className="flex items-center gap-2 px-5 py-2.5 text-slate-300 hover:text-white hover:bg-white/10 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-300"
-                  >
-                    <LayoutDashboard className="w-3.5 h-3.5" />
-                    Dashboard
-                  </a>
-                ) : (
-                  <a
-                    href="/"
-                    className="flex items-center gap-2 px-5 py-2.5 text-slate-300 hover:text-white hover:bg-white/10 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-300"
-                  >
-                    <Home className="w-3.5 h-3.5" />
-                    Home
-                  </a>
-                )}
                 <button
                   onClick={handleLogout}
                   className="p-2.5 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-full transition-all duration-300"
@@ -169,9 +154,8 @@ export const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-[99] bg-[#050b18]/95 backdrop-blur-xl transition-all duration-500 lg:hidden flex flex-col justify-center px-8 ${
-          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-[99] bg-[#050b18]/95 backdrop-blur-xl transition-all duration-500 lg:hidden flex flex-col justify-center px-8 ${isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col gap-6 mt-16">
           {navLinks.map((link) => (
@@ -189,9 +173,9 @@ export const Navbar = () => {
           <div className="w-full h-px bg-white/10 my-4" />
 
           <a
-            href="#"
+            href="/r6-audit"
             onClick={() => setIsMenuOpen(false)}
-            className="w-full py-4 flex items-center justify-center gap-2 bg-primary/10 border border-primary/20 text-primary text-sm font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-primary hover:text-black transition-all"
+            className="w-full py-4 flex items-center justify-center gap-2 bg-[#84ce3a]/10 border border-[#84ce3a]/20 text-[#84ce3a] text-sm font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-[#84ce3a] hover:text-black transition-all"
           >
             <Sparkles className="w-4 h-4" /> R6 Audit
           </a>
@@ -219,14 +203,6 @@ export const Navbar = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-4 mt-2">
-              <a
-                href={location.pathname === "/dashboard" ? "/" : "/dashboard"}
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full py-4 flex items-center justify-center gap-2 border border-white/10 text-white text-xs font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-white/5 transition-all"
-              >
-                {location.pathname === "/dashboard" ? <Home className="w-4 h-4" /> : <LayoutDashboard className="w-4 h-4" />}
-                {location.pathname === "/dashboard" ? "Back to Home" : "Dashboard"}
-              </a>
               <button
                 onClick={handleLogout}
                 className="w-full py-4 flex items-center justify-center gap-2 bg-red-500/10 border border-red-500/20 text-red-500 text-xs font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-red-500/20 transition-all"

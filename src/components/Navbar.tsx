@@ -50,11 +50,11 @@ export const Navbar = () => {
 
   const navLinks = [
     { name: "KM Vault", href: "/kmvault" },
-    { name: "About", href: "#about" },
+    { name: "About", href: "/about" },
+    { name: "Start Here", href: "/start-here" },
     { name: "POP", href: "/pop" },
     // { name: "R6 Audit", href: "#r6-audit" },
-    { name: "PSD Quickstart", href: "#psd-quickstart" },
-    { name: "Proof", href: "#proof" },
+    { name: "How it Works", href: "/how-titon-works" },
     { name: "Dashboard", href: "/dashboard" },
   ];
 

@@ -12,6 +12,12 @@ import NotFound from "./pages/NotFound.tsx";
 import PopPage from "./pages/PopPage.tsx";
 import KMVault from "./pages/KM/KMVault.tsx";
 import R6Audit from "./pages/R6Audit/R6Audit.tsx";
+import About from "./pages/About.tsx";
+import StartHere from "./pages/StartHere.tsx";
+import HowItWorks from "./pages/HowItWorks.tsx";
+
+
+
 
 const queryClient = new QueryClient();
 
@@ -30,6 +36,12 @@ const App = () => (
           <Route path="/pop" element={<PopPage />} />
           <Route path="/kmvault" element={<KMVault />} />
           <Route path="/r6-audit" element={<R6Audit />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/start-here" element={<StartHere />} />
+          <Route path="/how-titon-works" element={<HowItWorks />} />
+
+
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

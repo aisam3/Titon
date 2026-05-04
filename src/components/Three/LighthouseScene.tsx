@@ -15,8 +15,11 @@ const LighthouseContent = () => {
         const mm = gsap.matchMedia();
         mm.add("(min-width: 768px)", () => {
             const isPopPage = !!document.querySelector("#pop-container");
-            const trigger = isPopPage ? "#pop-container" : "#index-container";
-            const endTrigger = isPopPage ? "#problem-amplification" : "#achievements-section";
+            const isAboutPage = !!document.querySelector("#about-container");
+            const isStartHerePage = !!document.querySelector("#start-here-container");
+            
+            const trigger = isPopPage ? "#pop-container" : (isAboutPage ? "#about-container" : (isStartHerePage ? "#start-here-container" : "#index-container"));
+            const endTrigger = isPopPage ? "#problem-amplification" : (isAboutPage ? "#final-cta" : (isStartHerePage ? "#final-cta" : "#achievements-section"));
 
             const tl = gsap.timeline({
                 scrollTrigger: {

@@ -225,6 +225,9 @@ export const Navbar = () => {
           setIsAuthModalOpen(false);
           supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session);
+            if (session) {
+              navigate("/r6-audit");
+            }
           });
         }}
       />

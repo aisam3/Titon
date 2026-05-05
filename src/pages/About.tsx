@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { LighthouseScene } from "@/components/Three/LighthouseScene";
 import { WaitlistModal } from "@/components/Pop/WaitlistModal";
@@ -11,6 +12,7 @@ import { ChevronRight, ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Zap, Tar
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -22,8 +24,7 @@ const About = () => {
   const [selectedFleet, setSelectedFleet] = useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    setSelectedFleet(fleet);
-    setIsWaitlistOpen(true);
+    window.location.href = "https://www.skool.com/titon/about";
   };
 
   useEffect(() => {
@@ -43,9 +44,6 @@ const About = () => {
     requestAnimationFrame(raf);
 
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
 
     // Standard Scroll Entry Animations from Index.tsx
     const sections = ['#hero', '#different', '#purple-cow', '#why-now', '#membership', '#join-early', '#starter-guide', '#final-cta'];
@@ -58,7 +56,7 @@ const About = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: selector,
-          start: "top 80%",
+          start: "top 95%",
           toggleActions: "play none none reverse",
           scrub: false,
         }
@@ -108,20 +106,6 @@ const About = () => {
                 <p>
                   This is not a passive community. It is a structured collaborative for agencies that want to turn workflow activity into visible proof, stronger authority, and longer-term recurring value.
                 </p>
-              </div>
-              <div className="flex flex-wrap justify-center gap-6 pt-10">
-                <button 
-                  onClick={() => handleOpenWaitlist("Charter")}
-                  className="px-10 py-5 bg-primary text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all duration-500 rounded shadow-[0_0_30px_rgba(132,206,58,0.3)]"
-                >
-                  Join the TITON Charter Fleet Waitlist
-                </button>
-                <button 
-                  onClick={() => document.getElementById('membership')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-10 py-5 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-xs hover:border-primary hover:text-primary transition-all duration-500 rounded"
-                >
-                  View Membership Paths
-                </button>
               </div>
             </div>
           </div>
@@ -273,7 +257,7 @@ const About = () => {
                   <h3 className="text-2xl font-black uppercase tracking-tight mb-3">{tier.name}</h3>
                   <p className="text-primary font-black uppercase tracking-[0.3em] text-xs mb-10 opacity-70">{tier.count}</p>
                   <button 
-                    onClick={() => handleOpenWaitlist(tier.name.includes("Charter") ? "Charter" : tier.name.includes("Partner") ? "Partner" : "Extended")}
+                    onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                     className="mt-auto px-10 py-4 border border-white/20 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-500"
                   >
                     Select Path
@@ -368,21 +352,21 @@ const About = () => {
 
             <div className="flex flex-col md:flex-row justify-center gap-8">
               <button 
-                onClick={() => handleOpenWaitlist("Charter")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-primary transition-all duration-700 rounded shadow-xl"
               >
                 Join the TITON Charter Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Partner")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-primary text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all duration-700 rounded shadow-[0_0_40px_-10px_rgba(132,206,58,0.5)]"
               >
                 Join the TITON Partner Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Extended")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-transparent border border-white/10 text-white font-black uppercase tracking-widest text-xs hover:border-primary hover:text-primary transition-all duration-700 rounded"
               >
                 Join the TITON Extended Waitlist

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { LighthouseScene } from "@/components/Three/LighthouseScene";
 import { WaitlistModal } from "@/components/Pop/WaitlistModal";
@@ -23,6 +24,7 @@ import {
 } from "lucide-react";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -34,8 +36,7 @@ const HowItWorks = () => {
   const [selectedFleet, setSelectedFleet] = useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    setSelectedFleet(fleet);
-    setIsWaitlistOpen(true);
+    window.location.href = "https://www.skool.com/titon/about";
   };
 
   useEffect(() => {
@@ -144,7 +145,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-6xl"
           >
@@ -206,7 +207,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-5xl"
           >
@@ -266,7 +267,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-4xl"
           >
@@ -331,7 +332,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-4xl"
           >
@@ -371,13 +372,13 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-6xl text-center"
           >
             <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase mb-20">How It All Connects</h2>
             
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-4 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] overflow-x-auto pb-4">
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
               {[
                 "Individual Proof",
                 "Collective Analytics",
@@ -387,11 +388,10 @@ const HowItWorks = () => {
                 "More Proof"
               ].map((step, i, arr) => (
                 <React.Fragment key={i}>
-                  <div className="px-8 py-4 bg-primary/10 border border-primary/20 rounded-full text-primary hover:bg-primary hover:text-black transition-all duration-500">
+                  <div className="px-6 py-4 bg-primary/10 border border-primary/20 rounded-full text-primary hover:bg-primary hover:text-black transition-all duration-500 whitespace-nowrap min-w-fit">
                     {step}
                   </div>
-                  {i < arr.length - 1 && <ArrowRight className="w-6 h-6 text-white/20 hidden lg:block" />}
-                  {i < arr.length - 1 && <ArrowRight className="w-6 h-6 text-white/20 rotate-90 lg:hidden my-2" />}
+                  {i < arr.length - 1 && <ArrowRight className="w-5 h-5 text-white/20" />}
                 </React.Fragment>
               ))}
             </div>
@@ -407,7 +407,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-4xl"
           >
@@ -444,7 +444,7 @@ const HowItWorks = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto text-center space-y-16"
           >
@@ -457,21 +457,21 @@ const HowItWorks = () => {
 
             <div className="flex flex-col md:flex-row justify-center gap-8">
               <button 
-                onClick={() => handleOpenWaitlist("Charter")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-primary transition-all duration-700 rounded shadow-xl"
               >
                 Join the TITON Charter Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Partner")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-primary text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all duration-700 rounded shadow-[0_0_40px_-10px_rgba(132,206,58,0.5)]"
               >
                 Join the TITON Partner Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Extended")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-xs hover:border-primary hover:text-primary transition-all duration-700 rounded"
               >
                 Join the TITON Extended Waitlist

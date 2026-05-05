@@ -31,8 +31,7 @@ const PopPage = () => {
   const [selectedFleet, setSelectedFleet] = React.useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    setSelectedFleet(fleet);
-    setIsWaitlistOpen(true);
+    window.location.href = "https://www.skool.com/titon/about";
   };
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const PopPage = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: selector,
-          start: "top 80%",
+          start: "top 95%",
           toggleActions: "play none none reverse",
           scrub: false,
         }

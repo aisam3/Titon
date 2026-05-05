@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { LighthouseScene } from "@/components/Three/LighthouseScene";
 import { WaitlistModal } from "@/components/Pop/WaitlistModal";
@@ -11,6 +12,7 @@ import { ChevronRight, ArrowRight, CheckCircle2, ShieldCheck, Zap, Target, Layer
 gsap.registerPlugin(ScrollTrigger);
 
 const StartHere = () => {
+  const navigate = useNavigate();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -22,8 +24,7 @@ const StartHere = () => {
   const [selectedFleet, setSelectedFleet] = useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    setSelectedFleet(fleet);
-    setIsWaitlistOpen(true);
+    window.location.href = "https://www.skool.com/titon/about";
   };
 
   useEffect(() => {
@@ -43,9 +44,7 @@ const StartHere = () => {
     requestAnimationFrame(raf);
 
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+
 
     return () => {
       lenis.destroy();
@@ -138,7 +137,7 @@ const StartHere = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-4xl"
           >
@@ -205,7 +204,7 @@ const StartHere = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-5xl"
           >
@@ -257,7 +256,7 @@ const StartHere = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-6xl"
           >
@@ -311,7 +310,7 @@ const StartHere = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto max-w-4xl"
           >
@@ -347,7 +346,7 @@ const StartHere = () => {
           <motion.div 
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-20px" }}
             variants={sectionVariants}
             className="container mx-auto text-center space-y-16"
           >
@@ -360,21 +359,21 @@ const StartHere = () => {
 
             <div className="flex flex-col md:flex-row justify-center gap-8">
               <button 
-                onClick={() => handleOpenWaitlist("Charter")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-primary transition-all duration-700 rounded shadow-xl"
               >
                 Join the TITON Charter Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Partner")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-primary text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all duration-700 rounded shadow-[0_0_40px_-10px_rgba(132,206,58,0.5)]"
               >
                 Join the TITON Partner Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => handleOpenWaitlist("Extended")}
+                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
                 className="group relative px-12 py-7 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-xs hover:border-primary hover:text-primary transition-all duration-700 rounded"
               >
                 Join the TITON Extended Waitlist

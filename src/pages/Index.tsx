@@ -59,7 +59,7 @@ const Index = () => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: selector,
-          start: "top 80%",
+          start: "top 95%",
           toggleActions: "play none none reverse",
           scrub: false,
         }

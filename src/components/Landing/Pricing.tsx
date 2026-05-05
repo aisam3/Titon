@@ -60,7 +60,7 @@ export const Pricing = () => {
   const handleCustomCheckout = async (entries: number) => {
     setLoadingPlan("CUSTOM PLAN");
     setTimeout(() => {
-      window.location.href = "https://www.skool.com/business-optimization-experts-5569/about";
+        window.location.href = "https://www.skool.com/titon/about";
       setIsCustomModalOpen(false);
       setLoadingPlan(null);
     }, 800);
@@ -95,7 +95,7 @@ export const Pricing = () => {
     if (plan.name === "PARTNER FLEET" || plan.price === "$99") {
       setLoadingPlan(plan.name);
       setTimeout(() => {
-        window.location.href = "https://www.skool.com/business-optimization-experts-5569/about";
+          window.location.href = "https://www.skool.com/titon/about";
       }, 500);
       return;
     }

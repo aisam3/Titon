@@ -47,7 +47,7 @@ export const Hero = () => {
           {/* Buttons */}
           <div className="flex flex-wrap gap-4 pt-2">
             <a
-              href="#r6-audit"
+              href="/r6-audit"
               className="px-8 py-3.5 bg-primary text-black font-black text-xs md:text-sm rounded-full hover:bg-primary/90 transition-all uppercase tracking-widest shadow-[0_0_20px_rgba(132,206,58,0.2)] hover:shadow-[0_0_30px_rgba(132,206,58,0.4)] hover:-translate-y-0.5 flex items-center justify-center"
             >
               Run Your Navigation Check
@@ -72,7 +72,7 @@ export const Hero = () => {
                 </p>
               </div>
               <div className="relative z-10 space-y-4 mt-auto">
-                <a href="#r6-audit" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-primary hover:text-black hover:border-primary transition-all duration-300">
+                <a href="/r6-audit" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-primary hover:text-black hover:border-primary transition-all duration-300">
                   Run Your Navigation Check
                 </a>
                 <p className="text-[9px] text-slate-500 uppercase tracking-widest leading-relaxed">
@@ -91,7 +91,7 @@ export const Hero = () => {
                 </p>
               </div>
               <div className="relative z-10 space-y-4 mt-auto">
-                <a href="#psd-quickstart" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#06b6d4] hover:text-black hover:border-[#06b6d4] transition-all duration-300">
+                <a href="https://www.skool.com/titon/about" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#06b6d4] hover:text-black hover:border-[#06b6d4] transition-all duration-300">
                   Start With Our GHL Setup
                 </a>
                 <p className="text-[9px] text-slate-500 uppercase tracking-widest leading-relaxed">

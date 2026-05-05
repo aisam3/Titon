@@ -23,7 +23,7 @@ export const CTA = () => {
 
                <div className="flex flex-wrap justify-center md:justify-start gap-6 pt-6">
                   <button
-                     onClick={() => window.open("https://www.skool.com/business-optimization-experts-5569", "_blank")}
+                     onClick={() => window.open("https://www.skool.com/titon/about", "_blank")}
                      className="px-12 py-6 bg-[#84ce3a] text-black font-black rounded hover:bg-[#99da56] transition-all duration-500 uppercase tracking-widest text-xs"
                   >
                      Join on Skool.com

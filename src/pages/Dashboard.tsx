@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -50,6 +51,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const [user, setUser] = useState<any>(null);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -257,7 +259,10 @@ const Dashboard = () => {
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
-        onSuccess={checkUser}
+        onSuccess={() => {
+          checkUser();
+          navigate("/r6-audit");
+        }}
       />
 
       <main className="container mx-auto px-6 pt-32 pb-20 space-y-12 transition-all duration-700">

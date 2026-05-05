@@ -91,7 +91,7 @@ export const Hero = () => {
                 </p>
               </div>
               <div className="relative z-10 space-y-4 mt-auto">
-                <a href="https://www.skool.com/titon/about" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#06b6d4] hover:text-black hover:border-[#06b6d4] transition-all duration-300">
+                <a href="/r6-audit" className="flex items-center justify-center w-full py-3 bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-[#06b6d4] hover:text-black hover:border-[#06b6d4] transition-all duration-300">
                   Start With Our GHL Setup
                 </a>
                 <p className="text-[9px] text-slate-500 uppercase tracking-widest leading-relaxed">

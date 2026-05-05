@@ -31,7 +31,7 @@ const PopPage = () => {
   const [selectedFleet, setSelectedFleet] = React.useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    window.location.href = "https://www.skool.com/titon/about";
+    window.location.href = "/r6-audit";
   };
 
   useEffect(() => {

@@ -36,7 +36,7 @@ const HowItWorks = () => {
   const [selectedFleet, setSelectedFleet] = useState("Charter");
 
   const handleOpenWaitlist = (fleet: string = "Charter") => {
-    window.location.href = "https://www.skool.com/titon/about";
+    navigate("/r6-audit");
   };
 
   useEffect(() => {
@@ -457,21 +457,21 @@ const HowItWorks = () => {
 
             <div className="flex flex-col md:flex-row justify-center gap-8">
               <button 
-                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
+                onClick={() => navigate("/r6-audit")}
                 className="group relative px-12 py-7 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-primary transition-all duration-700 rounded shadow-xl"
               >
                 Join the TITON Charter Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
+                onClick={() => navigate("/r6-audit")}
                 className="group relative px-12 py-7 bg-primary text-black font-black uppercase tracking-widest text-xs hover:bg-white transition-all duration-700 rounded shadow-[0_0_40px_-10px_rgba(132,206,58,0.5)]"
               >
                 Join the TITON Partner Fleet Waitlist
                 <div className="absolute bottom-0 left-0 h-1.5 w-0 bg-accent group-hover:w-full transition-all duration-700" />
               </button>
               <button 
-                onClick={() => window.location.href = "https://www.skool.com/titon/about"}
+                onClick={() => navigate("/r6-audit")}
                 className="group relative px-12 py-7 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-xs hover:border-primary hover:text-primary transition-all duration-700 rounded"
               >
                 Join the TITON Extended Waitlist

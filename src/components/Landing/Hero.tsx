@@ -30,7 +30,7 @@ export const Hero = () => {
             <div className="inline-block px-4 py-1 border border-white/20 rounded-full text-white/40 text-[10px] uppercase tracking-widest mb-6 mt-8">
               ESTABLISHED 2026
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-tight text-white mb-4 tracking-tighter drop-shadow-xl">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black leading-tight text-white mb-4 tracking-tighter drop-shadow-xl">
               Enter the Race for <br className="hidden md:block" />
               <span className="text-primary drop-shadow-md">Authority.</span>
             </h1>

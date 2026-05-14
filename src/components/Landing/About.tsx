@@ -12,7 +12,7 @@ export const About = () => {
             <div className="w-8 h-[2px] bg-primary" />
             <span className="text-primary font-bold tracking-widest text-[10px] uppercase">OUR MANIFESTO</span>
           </div>
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none uppercase text-white">
+          <h2 className="text-4xl sm:text-5xl md:text-8xl font-black tracking-tighter leading-none uppercase text-white">
             BUILDING <br />
             <span className="text-primary">CERTAINTY.</span>
           </h2>
@@ -31,7 +31,7 @@ export const About = () => {
               key={i}
               whileHover={{ rotateX: 10, rotateY: 10, translateZ: 20 }}
               style={{ transformStyle: 'preserve-3d' }}
-              className="group p-10 bg-slate-900/40/50 backdrop-blur-3xl rounded-sm border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:border-primary/50 transition-colors duration-500"
+              className="group p-6 md:p-10 bg-slate-900/40 backdrop-blur-3xl rounded-sm border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.05)] hover:border-primary/50 transition-colors duration-500"
             >
               <div className="space-y-6" style={{ transform: 'translateZ(40px)' }}>
                 <div className="w-12 h-12 rounded-sm bg-primary/10 flex items-center justify-center font-black text-primary text-xs border border-primary/20 shadow-[0_0_20px_rgba(0,163,255,0.2)]">

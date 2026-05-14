@@ -4,7 +4,7 @@ import { Menu, X, LogIn, UserPlus, LayoutDashboard, LogOut, Home, Sparkles, Chev
 import { supabase } from "@/lib/supabase";
 import { AuthModal } from "./AuthModal";
 import { toast } from "sonner";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { GlobalSearch } from "./GlobalSearch";
 
 export const Navbar = () => {
@@ -49,13 +49,16 @@ export const Navbar = () => {
   };
 
   const navLinks = [
-    { name: "KM Vault", href: "/kmvault" },
+    // { name: "KM Vault", href: "/kmvault" },
     { name: "About", href: "/about" },
     { name: "Start Here", href: "/start-here" },
+    { name: "Charter Fleet", href: "/charter-fleet" },
+    { name: "Workflow", href: "/workflow" },
+    { name: "Proof Tiles", href: "/proof-tiles" },
     { name: "POP", href: "/pop" },
-    // { name: "R6 Audit", href: "#r6-audit" },
     { name: "How it Works", href: "/how-titon-works" },
     { name: "Dashboard", href: "/dashboard" },
+    { name: "Contact Us", href: "/help" },
   ];
 
   return (
@@ -64,12 +67,12 @@ export const Navbar = () => {
         <nav
           ref={navRef}
           className={`pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between w-full max-w-[1400px] ${scrolled || isMenuOpen
-              ? "py-3 px-6 bg-[#0a1122]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-[32px]"
-              : "py-4 px-2 bg-transparent rounded-none"
+            ? "py-3 px-6 bg-[#0a1122]/80 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.4)] rounded-[32px]"
+            : "py-4 px-2 bg-transparent rounded-none"
             }`}
         >
           {/* Logo Section */}
-          <a href="/" className="flex items-center gap-3 group/logo cursor-pointer shrink-0">
+          <Link to="/" className="flex items-center gap-3 group/logo cursor-pointer shrink-0">
             <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center transition-transform duration-500 group-hover/logo:scale-110">
               <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-50 opacity-0 group-hover/logo:opacity-100 group-hover/logo:scale-150 transition-all duration-700" />
               <img
@@ -86,30 +89,30 @@ export const Navbar = () => {
                 System
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Center Links (Desktop) */}
-          <div className="hidden lg:flex items-center gap-2 px-4 py-2 bg-white/[0.03] rounded-full border border-white/5">
+          <div className="hidden lg:flex items-center gap-1 px-3 py-1.5 bg-white/[0.03] rounded-full border border-white/5">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                className="px-4 py-2 text-[11px] font-bold text-slate-300 uppercase tracking-[0.2em] hover:text-white hover:bg-white/10 rounded-full transition-all duration-300"
+                to={link.href}
+                className="px-2.5 py-1.5 text-[10px] font-bold text-slate-300 uppercase tracking-[0.1em] hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 whitespace-nowrap"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </div>
 
           {/* Right Actions (Desktop) */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <a
+            {/* <a
               href="/r6-audit"
               className="group flex items-center gap-2 px-5 py-2.5 bg-[#84ce3a]/10 border border-[#84ce3a]/20 text-[#84ce3a] hover:bg-[#84ce3a] hover:text-black text-[10px] font-black uppercase tracking-[0.3em] rounded-full transition-all duration-500"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>R6 Audit</span>
-            </a>
+            </a> */}
 
             <div className="w-px h-8 bg-white/10 mx-1" />
 
@@ -159,26 +162,26 @@ export const Navbar = () => {
       >
         <div className="flex flex-col gap-6 mt-16">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               onClick={() => setIsMenuOpen(false)}
               className="text-white text-2xl font-black uppercase tracking-tighter hover:text-primary transition-colors flex items-center justify-between group"
             >
               {link.name}
               <ChevronRight className="w-6 h-6 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
-            </a>
+            </Link>
           ))}
 
           <div className="w-full h-px bg-white/10 my-4" />
 
-          <a
-            href="/r6-audit"
+          <Link
+            to="/r6-audit"
             onClick={() => setIsMenuOpen(false)}
-            className="w-full py-4 flex items-center justify-center gap-2 bg-[#84ce3a]/10 border border-[#84ce3a]/20 text-[#84ce3a] text-sm font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-[#84ce3a] hover:text-black transition-all"
+            className="w-full py-4 flex items-center justify-center gap-2 bg-primary/10 border border-primary/20 text-primary text-sm font-black uppercase tracking-[0.3em] rounded-2xl hover:bg-primary hover:text-black transition-all"
           >
             <Sparkles className="w-4 h-4" /> R6 Audit
-          </a>
+          </Link>
 
           {!session ? (
             <div className="grid grid-cols-2 gap-4 mt-2">

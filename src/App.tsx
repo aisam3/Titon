@@ -10,14 +10,15 @@ import Success from "./pages/checkout/Success.tsx";
 import Cancel from "./pages/checkout/Cancel.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PopPage from "./pages/PopPage.tsx";
-import KMVault from "./pages/KM/KMVault.tsx";
-import R6Audit from "./pages/R6Audit/R6Audit.tsx";
+// import KMVault from "./pages/KM/KMVault.tsx";
+// import R6Audit from "./pages/R6Audit/R6Audit.tsx";
 import About from "./pages/About.tsx";
 import StartHere from "./pages/StartHere.tsx";
 import HowItWorks from "./pages/HowItWorks.tsx";
-
-
-
+import Help from "./pages/Help.tsx";
+import CharterFleet from "./pages/CharterFleet.tsx";
+import WorkflowEngine from "./pages/WorkflowEngine.tsx";
+import ProofTiles from "./pages/ProofTiles.tsx";
 
 const queryClient = new QueryClient();
 
@@ -34,11 +35,15 @@ const App = () => (
           <Route path="/success" element={<Success />} />
           <Route path="/cancel" element={<Cancel />} />
           <Route path="/pop" element={<PopPage />} />
-          <Route path="/kmvault" element={<KMVault />} />
-          <Route path="/r6-audit" element={<R6Audit />} />
+          {/* <Route path="/kmvault" element={<KMVault />} /> */}
+          {/* <Route path="/r6-audit" element={<R6Audit />} /> */}
           <Route path="/about" element={<About />} />
           <Route path="/start-here" element={<StartHere />} />
           <Route path="/how-titon-works" element={<HowItWorks />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/charter-fleet" element={<CharterFleet />} />
+          <Route path="/workflow" element={<WorkflowEngine />} />
+          <Route path="/proof-tiles" element={<ProofTiles />} />
 
 
 
